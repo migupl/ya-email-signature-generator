@@ -37,6 +37,12 @@
             color: black;
         }
 
+        .container-row-center {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+        }
+
         #contact,
         #personal-details {
             border-left: 2px solid inherit;
@@ -56,9 +62,6 @@
         }
 
         #profile {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
             align-items: flex-start;
         }
 
@@ -70,9 +73,6 @@
         #social {
             min-width: 95%;
 
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
             align-items: center;
         }
 
@@ -87,7 +87,7 @@
     </style>
 </head>
 <body>
-    <div id="profile" class="item">
+    <div id="profile" class="item container-row-center">
         <div id="picture" class="item">
             <img src="/assets/empty-profile.png" alt="">
         </div>
@@ -116,7 +116,7 @@
             <i class="bi bi-geo-alt"></i>
             <a href="" target="_blank" rel="noopener noreferrer"> line 1, line 2, line 3, line 4</a>
         </div>
-        <div id="social" class="item">
+        <div id="social" class="item container-row-center">
             <div id="facebook" class="item"><i class="bi bi-facebook"></i></div>
             <div id="youtube" class="item"><i class="bi bi-youtube"></i></div>
             <div id="twitter" class="item"><i class="bi bi-twitter-x"></i></div>
