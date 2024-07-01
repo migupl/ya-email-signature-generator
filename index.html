@@ -164,6 +164,13 @@
                         description: 'Enter your <strong>Last Name</strong>'
                     },
                 ]
+            }).then(form => {
+                form.on('change', ({ changed }) => {
+                    const { component: { key }, value} = changed;
+
+                    const el = document.getElementById(key);
+                    el.innerText = value
+                });
             });
         }
     </script>
