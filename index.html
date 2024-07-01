@@ -37,7 +37,8 @@
             color: black;
         }
 
-        #contact {
+        #contact,
+        #personal-details {
             border-left: 2px solid inherit;
 
             display: flex;
@@ -48,6 +49,22 @@
 
         #mobile:before {
             content: "|";
+        }
+
+        #name {
+            font-weight: bold;
+        }
+
+        #profile {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        #picture img {
+            max-width: 150px;
+            width: 150px;
         }
 
         #social {
@@ -70,8 +87,16 @@
     </style>
 </head>
 <body>
-    <div id="personal-data" class="item">
-        Picture, name, title...
+    <div id="profile" class="item">
+        <div id="picture" class="item">
+            <img src="/assets/empty-profile.png" alt="">
+        </div>
+        <div id="personal-details" class="item">
+            <div id="name" class="item">Green Smith</div>
+            <div class="item">Job title</div>
+            <div class="item">Department</div>
+            <div class="item">Company name</div>
+        </div>
     </div>
     <div id="contact" class="item">
         <div id="phones" class="item">
