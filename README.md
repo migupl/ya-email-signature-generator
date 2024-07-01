@@ -1,5 +1,9 @@
 # Yet Another Email Signature Generator
 
+## Helpers
+
+[formio.js](https://github.com/formio/formio.js), a plain JavaScript form renderer of the JSON schema forms produced by Form.io and render those within your application using plain JavaScript ([form builder](https://formio.github.io/formio.js/app/builder.html)).
+
 ## License
 
 [MIT license](./LICENSE)
