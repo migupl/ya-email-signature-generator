@@ -25,40 +25,6 @@
         html,
         body {
             height: 100%;
-
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        body .item {
-            margin-left: 5px;
-            padding: 5px;
-
-            border: 1px dotted;
-            color: black;
-        }
-
-        .container-form {
-            height: 100%;
-            background-color: lightgray;
-        }
-
-        .container-row-center {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-        }
-
-        #contact,
-        #personal-details {
-            border-left: 2px solid inherit;
-
-            display: flex;
-            flex-flow: column wrap;
-            justify-content: center;
-            align-items: flex-start;
         }
 
         #mobile:before {
@@ -69,19 +35,9 @@
             font-weight: bold;
         }
 
-        #profile {
-            align-items: flex-start;
-        }
-
         #picture img {
             max-width: 150px;
             width: 150px;
-        }
-
-        #social {
-            min-width: 95%;
-
-            align-items: center;
         }
 
         a {
@@ -96,55 +52,105 @@
 </head>
 
 <body>
-    <div class="container-form">
-        <div class="item">
+    <div class="d-flex flex-row justify-content-start h-100">
+        <div class="w-25 bg-light">
             <h2>Complete Your Signature Details</h2>
-        </div>
-        <div class="item">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary" onclick="setLanguage('sp')">Español</button>
-                <button type="button" class="btn btn-primary" onclick="setLanguage('en')">English</button>
+            <div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" onclick="setLanguage('sp')">Español</button>
+                    <button type="button" class="btn btn-primary" onclick="setLanguage('en')">English</button>
+                </div>
             </div>
+            <div id="formio"></div>
         </div>
-        <div id="formio" class="item"></div>
-    </div>
-    <div id="profile" class="container-row-center">
-        <div id="picture" class="item">
-            <img src="/assets/empty-profile.png" alt="">
-        </div>
-        <div id="personal-details" class="item">
-            <div id="name" class="item">Green Smith</div>
-            <div class="item">Job title</div>
-            <div class="item">Department</div>
-            <div class="item">Company name</div>
-        </div>
-    </div>
-    <div id="contact" class="item">
-        <div id="phones" class="item">
-            <img src="/assets/telephone.svg" alt="Telephone icon">
-            <a href="tel:">+00 111 222 3333</a>
-            <a id="mobile" href="tel:">+00 111 222 3333</a>
-        </div>
-        <div id="email" class="item">
-            <img src="/assets/envelope.svg" alt="Envelope icon">
-            <a href="mailto:">green.smith@domain.com</a>
-        </div>
-        <div id="home" class="item">
-            <img src="/assets/house.svg" alt="Home icon">
-            <a href="" target="_blank" rel="noopener noreferrer">www.green.smith</a>
-        </div>
-        <div id="address" class="item">
-            <img src="/assets/geo-alt.svg" alt="Geo alt icon">
-            <a href="" target="_blank" rel="noopener noreferrer"> line 1, line 2, line 3, line 4</a>
-        </div>
-        <div id="social" class="item container-row-center">
-            <div id="facebook" class="item"><img src="/assets/facebook.svg" alt="Facebook icon"></div>
-            <div id="youtube" class="item"><img src="/assets/youtube.svg" alt="Youtube icon"></div>
-            <div id="twitter" class="item"><img src="/assets/twitter-x.svg" alt="Twitter X icon"></div>
-            <div id="mastodon" class="item"><img src="/assets/mastodon.svg" alt="Mastodon icon"></div>
-            <div id="linkedin" class="item"><img src="/assets/linkedin.svg" alt="LinkedIn icon"></div>
-            <div id="instagram" class="item"><img src="/assets/instagram.svg" alt="Instagram icon"></div>
-            <div id="ticktock" class="item"><img src="/assets/tiktok.svg" alt="TikTok icon"></div>
+        <div class="d-flex flex-row justify-content-center align-items-center w-75">
+            <div class="d-flex flex-column justify-content-center h-100">
+                <table class="table table-borderless table-sm">
+                    <tbody>
+                        <tr>
+                            <td id="picture" rowspan="4">
+                                <img src="/assets/empty-profile.png" alt="">
+                            </td>
+                            <td id="name">Green Smith</td>
+                            <td>
+                                <img src="/assets/telephone.svg" alt="Telephone icon">
+                                <a href="tel:">+00 111 222 3333</a>
+                                <a id="mobile" href="tel:">+00 111 222 3333</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Job title</td>
+                            <td id="email">
+                                <img src="/assets/envelope.svg" alt="Envelope icon">
+                                <a href="mailto:">green.smith@domain.com</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Department</td>
+                            <td id="home">
+                                <img src="/assets/house.svg" alt="Home icon">
+                                <a href="" target="_blank" rel="noopener noreferrer">www.green.smith</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Company name</td>
+                            <td id="address">
+                                <img src="/assets/geo-alt.svg" alt="Geo alt icon">
+                                <a href="" target="_blank" rel="noopener noreferrer"> line 1, line 2, line 3, line
+                                    4</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <table class="table table-sm table-borderless mb-0">
+                                    <th></th>
+                                    <tbody>
+                                        <tr>
+                                            <td id="facebook">
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    <img src="/assets/facebook.svg" alt="Facebook icon">
+                                                </a>
+                                            </td>
+                                            <td id="youtube">
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    <img src="/assets/youtube.svg" alt="Youtube icon">
+                                                </a>
+                                            </td>
+                                            <td id="twitter">
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    <img src="/assets/twitter-x.svg" alt="Twitter X icon">
+                                                </a>
+                                            </td>
+                                            <td id="mastodon">
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    <img src="/assets/mastodon.svg" alt="Mastodon icon">
+                                                </a>
+                                            </td>
+                                            <td id="linkedin">
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    <img src="/assets/linkedin.svg" alt="LinkedIn icon">
+                                                </a>
+                                            </td>
+                                            <td id="instagram">
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    <img src="/assets/instagram.svg" alt="Instagram icon">
+                                                </a>
+                                            </td>
+                                            <td id="ticktock">
+                                                <a href="" target="_blank" rel="noopener noreferrer">
+                                                    <img src="/assets/tiktok.svg" alt="TikTok icon">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
