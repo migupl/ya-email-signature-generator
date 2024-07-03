@@ -157,6 +157,12 @@
     <script src="https://cdn.form.io/js/formio.embed.js"></script>
     <script>
         window.onload = () => {
+            const getUrl = str => {
+                const clean = str.trim();
+                if (clean.startsWith('http')) return clean
+                return `https://${clean}`
+            }
+
             Formio.createForm(document.getElementById('formio'), {
                 components: [
                     {
@@ -206,7 +212,22 @@
                         key: 'homepage',
                         label: '<strong>Website URL</strong>',
                         placeholder: 'www.acmt.com',
-                        input: true
+                        input: true,
+                        errorLabel: 'Invalid Website URL',
+                        validateOn: 'blur',
+                        validate: {
+                            custom: ({ component, input }) => {
+                                try {
+                                    const url = getUrl(input);
+                                    new URL(url)
+                                }
+                                catch (_) {
+                                    return component.errorLabel
+                                }
+
+                                return ''
+                            }
+                        }
                     },
                     {
                         type: 'textfield',
@@ -236,7 +257,8 @@
                         '<strong>Name</strong>': '<strong>Nombre y apellidos</strong>',
                         '<strong>Office Phone Number</strong>': '<strong>Número de teléfono</strong>',
                         '<strong>Website URL</strong>': '<strong>Sitio Web</strong>',
-                        'Invalid Email': 'El correo electrónico es inválido'
+                        'Invalid Email': 'El correo electrónico es inválido',
+                        'Invalid Website URL': 'La URL del Sitio Web es inválida'
                     }
                 }
             }).then(form => {
@@ -245,7 +267,7 @@
 
                     const el = document.getElementById(key);
                     if ('homepage' === key) {
-                        el.href = value
+                        el.href = getUrl(value)
                         el.innerText = value
                     }
                     else if ('email' === key) {
