@@ -214,6 +214,14 @@
                         label: '<strong>Email Address</strong>',
                         placeholder: 'green.smith@acmt.com',
                         input: true,
+                        errorLabel: 'Invalid Email',
+                        validateOn: 'blur',
+                        validate: {
+                            custom: ({ component, input }) => {
+                                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                return regex.test(input) ? '' : component.errorLabel
+                            }
+                        }
                     },
                 ]
             }, {
@@ -227,7 +235,8 @@
                         '<strong>Mobile Phone Number</strong>': '<strong>Número de móvil</strong>',
                         '<strong>Name</strong>': '<strong>Nombre y apellidos</strong>',
                         '<strong>Office Phone Number</strong>': '<strong>Número de teléfono</strong>',
-                        '<strong>Website URL</strong>': '<strong>Sitio Web</strong>'
+                        '<strong>Website URL</strong>': '<strong>Sitio Web</strong>',
+                        'Invalid Email': 'El correo electrónico es inválido'
                     }
                 }
             }).then(form => {
