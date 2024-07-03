@@ -74,26 +74,26 @@
                             <td id="name">Green Smith</td>
                             <td>
                                 <img src="/assets/telephone.svg" alt="Telephone icon">
-                                <a href="tel:">+00 111 222 3333</a>
-                                <a id="mobile" href="tel:">+00 111 222 3333</a>
+                                <a id="telephone" href="tel:">+00 111 222 3333</a>
+                                <a id="mobile-phone" href="tel:">+00 111 222 3333</a>
                             </td>
                         </tr>
                         <tr>
-                            <td>Job title</td>
-                            <td id="email">
+                            <td id="job-title">Job title</td>
+                            <td>
                                 <img src="/assets/envelope.svg" alt="Envelope icon">
-                                <a href="mailto:">green.smith@domain.com</a>
+                                <a id="email" href="mailto:">green.smith@domain.com</a>
                             </td>
                         </tr>
                         <tr>
-                            <td>Department</td>
-                            <td id="home">
+                            <td id="department">Department</td>
+                            <td>
                                 <img src="/assets/house.svg" alt="Home icon">
-                                <a href="" target="_blank" rel="noopener noreferrer">www.green.smith</a>
+                                <a id="homepage" href="" target="_blank" rel="noopener noreferrer">www.green.smith</a>
                             </td>
                         </tr>
                         <tr>
-                            <td>Company name</td>
+                            <td id="company-name">Company name</td>
                             <td id="address">
                                 <img src="/assets/geo-alt.svg" alt="Geo alt icon">
                                 <a href="" target="_blank" rel="noopener noreferrer"> line 1, line 2, line 3, line
@@ -163,16 +163,71 @@
                         type: 'textfield',
                         key: 'name',
                         label: '<strong>Name</strong>',
-                        placeholder: 'Enter your name.',
+                        placeholder: 'Green Smith',
                         input: true
+                    },
+                    {
+                        type: 'textfield',
+                        key: 'job-title',
+                        label: '<strong>Job Title</strong>',
+                        placeholder: 'Software Developer',
+                        input: true
+                    },
+                    {
+                        type: 'textfield',
+                        key: 'department',
+                        label: '<strong>Department</strong>',
+                        placeholder: 'IT',
+                        input: true
+                    },
+                    {
+                        type: 'textfield',
+                        key: 'company-name',
+                        label: '<strong>Company Name</strong>',
+                        placeholder: 'A Company Making Things',
+                        input: true
+                    },
+                    {
+                        type: 'textfield',
+                        key: 'telephone',
+                        label: '<strong>Office Phone Number</strong>',
+                        placeholder: '+00 111 222 3333',
+                        input: true
+                    },
+                    {
+                        type: 'textfield',
+                        key: 'mobile-phone',
+                        label: '<strong>Mobile Phone Number</strong>',
+                        placeholder: '+00 111 222 3333',
+                        input: true
+                    },
+                    {
+                        type: 'textfield',
+                        key: 'homepage',
+                        label: '<strong>Website URL</strong>',
+                        placeholder: 'www.acmt.com',
+                        input: true
+                    },
+                    {
+                        type: 'textfield',
+                        key: 'email',
+                        label: '<strong>Email Address</strong>',
+                        placeholder: 'green.smith@acmt.com',
+                        input: true,
                     },
                 ]
             }, {
                 language: 'en',
                 i18n: {
                     sp: {
+                        '<strong>Company Name</strong>': '<strong>Nombre de la empresa</strong>',
+                        '<strong>Department</strong>': '<strong>Departamento</strong>',
+                        '<strong>Email Address</strong>': '<strong>Correo electrónico</strong>',
+                        '<strong>Job Title</strong>': '<strong>Cargo</strong>',
+                        '<strong>Mobile Phone Number</strong>': '<strong>Número de móvil</strong>',
                         '<strong>Name</strong>': '<strong>Nombre y apellidos</strong>',
-                        'Enter your name.': 'Introduce tu nombre y apellidos'
+                        '<strong>Office Phone Number</strong>': '<strong>Número de teléfono</strong>',
+                        '<strong>Website URL</strong>': '<strong>Sitio Web</strong>'
                     }
                 }
             }).then(form => {
@@ -180,7 +235,17 @@
                     const { component: { key }, value } = changed;
 
                     const el = document.getElementById(key);
-                    el.innerText = value
+                    if ('homepage' === key) {
+                        el.href = value
+                        el.innerText = value
+                    }
+                    else if ('email' === key) {
+                        el.href = 'mailto:' + value
+                        el.innerText = value
+                    }
+                    else {
+                        el.innerText = value
+                    }
                 });
 
                 window.setLanguage = lang => {
