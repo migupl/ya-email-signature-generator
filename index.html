@@ -65,25 +65,25 @@
                             <td rowspan="4">
                                 <img id="profile-picture" src="/assets/empty-profile.png" alt="" width="150" height="150">
                             </td>
-                            <td id="name">Green Smith</td>
+                            <td id="name"></td>
                             <td>
                                 <img src="/assets/telephone.svg" alt="Telephone icon">
-                                <a id="telephone" href="tel:">+00 111 222 3333</a>
-                                <a id="mobile-phone" href="tel:">+00 111 222 3333</a>
+                                <a id="telephone" href="tel:"></a>
+                                <a id="mobile-phone" href="tel:"></a>
                             </td>
                         </tr>
                         <tr>
-                            <td id="job-title">Job title</td>
+                            <td id="job-title"></td>
                             <td>
                                 <img src="/assets/envelope.svg" alt="Envelope icon">
-                                <a id="email" href="mailto:">green.smith@domain.com</a>
+                                <a id="email" href="mailto:"></a>
                             </td>
                         </tr>
                         <tr>
-                            <td id="company-name">Company name</td>
+                            <td id="company-name"></td>
                             <td>
                                 <img src="/assets/house.svg" alt="Home icon">
-                                <a id="homepage" href="" target="_blank" rel="noopener noreferrer">www.green.smith</a>
+                                <a id="homepage" href="" target="_blank" rel="noopener noreferrer"></a>
                             </td>
                         </tr>
                         <tr>
@@ -284,26 +284,35 @@
                             form.on('change', ({ changed }) => {
                                 const { component: { key }, value } = changed;
 
-                            const el = document.getElementById(key);
-                            if ('homepage' === key) {
-                                el.href = getUrl(value)
-                                el.innerText = value
-                            }
-                            else if ('email' === key) {
-                                el.href = 'mailto:' + value
-                                el.innerText = value
-                            }
-                            else if ('profile-picture' === key) {
-                                el.src = value
-                            }
-                            else {
-                                el.innerText = value
-                            }
-                        });
+                                const el = document.getElementById(key);
+                                if ('homepage' === key) {
+                                    el.href = getUrl(value)
+                                    el.innerText = value
+                                }
+                                else if ('email' === key) {
+                                    el.href = 'mailto:' + value
+                                    el.innerText = value
+                                }
+                                else if ('profile-picture' === key) {
+                                    el.src = value
+                                }
+                                else {
+                                    el.innerText = value
+                                }
+                            });
 
                             window.setLanguage = lang => {
                                 form.language = lang;
                             }
+
+                            components.forEach(component => {
+                                const { key, placeholder } = component;
+
+                                if ('profile-picture' != key) {
+                                    const el = document.getElementById(key);
+                                    el.innerText = placeholder
+                                }
+                            })
                         });
                 })
         }
