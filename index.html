@@ -178,88 +178,89 @@
             telInputIntl.promise
                 .then(() => {
                     const phoneNumberMask = telephoneCheck.placeholder.replace(/\d/g, "9");
+                    const components = [
+                        {
+                            type: 'url',
+                            key: 'profile-picture',
+                            label: 'Profile Picture',
+                            placeholder: 'https://acmt.com/employees/f12645ff6a58e619d096afbbda394794.jpg',
+                            input: true,
+                            errors: {
+                                invalid_url: 'Profile picture must be a valid url'
+                            },
+                            validateOn: 'blur'
+                        },
+                        {
+                            type: 'textfield',
+                            key: 'name',
+                            label: 'Name and surname',
+                            placeholder: 'Green Smith',
+                            input: true
+                        },
+                        {
+                            type: 'textfield',
+                            key: 'job-title',
+                            label: 'Job Title',
+                            placeholder: 'Software Developer',
+                            input: true
+                        },
+                        {
+                            type: 'textfield',
+                            key: 'company-name',
+                            label: 'Company Name',
+                            placeholder: 'A Company Making Things',
+                            input: true
+                        },
+                        {
+                            type: 'phoneNumber',
+                            key: 'telephone',
+                            label: 'Main Phone Number',
+                            placeholder: telephoneCheck.placeholder,
+                            input: true,
+                            inputMask: phoneNumberMask,
+                            errors: {
+                                mask: 'Main Phone Number does not match the mask'
+                            },
+                            validateOn: 'blur'
+                        },
+                        {
+                            type: 'phoneNumber',
+                            key: 'mobile-phone',
+                            label: 'Mobile Phone Number',
+                            placeholder: telephoneCheck.placeholder,
+                            input: true,
+                            inputMask: phoneNumberMask,
+                            errors: {
+                                mask: 'Mobile Phone Number does not match the mask'
+                            },
+                            validateOn: 'blur'
+                        },
+                        {
+                            type: 'url',
+                            key: 'homepage',
+                            label: 'Website URL',
+                            placeholder: 'https://acmt.com/',
+                            input: true,
+                            errors: {
+                                invalid_url: 'Website URL must be a valid url'
+                            },
+                            validateOn: 'blur'
+                        },
+                        {
+                            type: 'email',
+                            key: 'email',
+                            label: 'Email Address',
+                            placeholder: 'green.smith@acmt.com',
+                            input: true,
+                            errors: {
+                                invalid_email: 'Email Address must be a valid email'
+                            },
+                            validateOn: 'blur'
+                        },
+                    ];
 
                     Formio.createForm(document.getElementById('formio'), {
-                        components: [
-                            {
-                                type: 'url',
-                                key: 'profile-picture',
-                                label: 'Profile Picture',
-                                placeholder: 'https://acmt.com/employees/f12645ff6a58e619d096afbbda394794.jpg',
-                                input: true,
-                                errors: {
-                                    invalid_url: 'Profile picture must be a valid url'
-                                },
-                                validateOn: 'blur'
-                            },
-                            {
-                                type: 'textfield',
-                                key: 'name',
-                                label: 'Name and surname',
-                                placeholder: 'Green Smith',
-                                input: true
-                            },
-                            {
-                                type: 'textfield',
-                                key: 'job-title',
-                                label: 'Job Title',
-                                placeholder: 'Software Developer',
-                                input: true
-                            },
-                            {
-                                type: 'textfield',
-                                key: 'company-name',
-                                label: 'Company Name',
-                                placeholder: 'A Company Making Things',
-                                input: true
-                            },
-                            {
-                                type: 'phoneNumber',
-                                key: 'telephone',
-                                label: 'Main Phone Number',
-                                placeholder: telephoneCheck.placeholder,
-                                input: true,
-                                inputMask: phoneNumberMask,
-                                errors: {
-                                    mask: 'Main Phone Number does not match the mask'
-                                },
-                                validateOn: 'blur'
-                            },
-                            {
-                                type: 'phoneNumber',
-                                key: 'mobile-phone',
-                                label: 'Mobile Phone Number',
-                                placeholder: telephoneCheck.placeholder,
-                                input: true,
-                                inputMask: phoneNumberMask,
-                                errors: {
-                                    mask: 'Mobile Phone Number does not match the mask'
-                                },
-                                validateOn: 'blur'
-                            },
-                            {
-                                type: 'url',
-                                key: 'homepage',
-                                label: 'Website URL',
-                                placeholder: 'https://acmt.com/',
-                                input: true,
-                                errors: {
-                                    invalid_url: 'Website URL must be a valid url'
-                                },
-                                validateOn: 'blur'
-                            },
-                            {
-                                type: 'email',
-                                key: 'email',
-                                label: 'Email Address',
-                                placeholder: 'green.smith@acmt.com',
-                                input: true,
-                                errors: {
-                                    invalid_email: 'Email Address must be a valid email'
-                                },
-                                validateOn: 'blur'
-                            },
-                        ]
+                        components
                     }, {
                         language: 'en',
                         i18n: {
@@ -305,7 +306,7 @@
                         }
                     });
                 })
-            }
+        }
     </script>
 </body>
 </html>
