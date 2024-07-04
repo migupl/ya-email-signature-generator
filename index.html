@@ -62,7 +62,8 @@
                     <tbody>
                         <tr>
                             <td rowspan="4">
-                                <img id="profile-picture" src="/assets/empty-profile.png" alt="" width="150" height="150">
+                                <img id="profile-picture" src="/assets/empty-profile.png" alt="" width="150"
+                                    height="150">
                             </td>
                             <td id="name"></td>
                             <td>
@@ -176,13 +177,23 @@
                         if (clean.startsWith('http')) return clean
                         return `https://${clean}`
                     };
-                    const phoneNumberMask = telephoneCheck.placeholder.replace(/\d/g, "9");
+
+                    const defaults = {
+                        email: 'green.smith@acmt.com',
+                        companyName: 'A Company Making Things',
+                        fullname: 'Green Smith',
+                        jobTitle: 'Software Developer',
+                        phone: telephoneCheck.placeholder,
+                        phoneNumberMask: telephoneCheck.placeholder.replace(/\d/g, "9"),
+                        profilePicture: 'https://acmt.com/employees/f12645ff6a58e619d096afbbda394794.jpg',
+                        website: 'https://acmt.com/'
+                    };
                     const components = [
                         {
                             type: 'url',
                             key: 'profile-picture',
                             label: 'Profile Picture',
-                            placeholder: 'https://acmt.com/employees/f12645ff6a58e619d096afbbda394794.jpg',
+                            placeholder: defaults.profilePicture,
                             input: true,
                             errors: {
                                 invalid_url: 'Profile picture must be a valid url'
@@ -193,30 +204,30 @@
                             type: 'textfield',
                             key: 'name',
                             label: 'Name and surname',
-                            placeholder: 'Green Smith',
+                            placeholder: defaults.fullname,
                             input: true
                         },
                         {
                             type: 'textfield',
                             key: 'job-title',
                             label: 'Job Title',
-                            placeholder: 'Software Developer',
+                            placeholder: defaults.jobTitle,
                             input: true
                         },
                         {
                             type: 'textfield',
                             key: 'company-name',
                             label: 'Company Name',
-                            placeholder: 'A Company Making Things',
+                            placeholder: defaults.companyName,
                             input: true
                         },
                         {
                             type: 'phoneNumber',
                             key: 'telephone',
                             label: 'Main Phone Number',
-                            placeholder: telephoneCheck.placeholder,
+                            placeholder: defaults.phone,
                             input: true,
-                            inputMask: phoneNumberMask,
+                            inputMask: defaults.phoneNumberMask,
                             errors: {
                                 mask: 'Main Phone Number does not match the mask'
                             },
@@ -226,9 +237,9 @@
                             type: 'phoneNumber',
                             key: 'mobile-phone',
                             label: 'Mobile Phone Number',
-                            placeholder: telephoneCheck.placeholder,
+                            placeholder: defaults.phone,
                             input: true,
-                            inputMask: phoneNumberMask,
+                            inputMask: defaults.phoneNumberMask,
                             errors: {
                                 mask: 'Mobile Phone Number does not match the mask'
                             },
@@ -238,7 +249,7 @@
                             type: 'url',
                             key: 'homepage',
                             label: 'Website URL',
-                            placeholder: 'https://acmt.com/',
+                            placeholder: defaults.website,
                             input: true,
                             errors: {
                                 invalid_url: 'Website URL must be a valid url'
@@ -248,28 +259,36 @@
                         {
                             type: 'email',
                             key: 'email',
-                            label: 'Email Address',
-                            placeholder: 'green.smith@acmt.com',
+                            label: 'Company Email',
+                            placeholder: defaults.email,
                             input: true,
                             errors: {
-                                invalid_email: 'Email Address must be a valid email'
+                                invalid_email: 'Company Email must be a valid email'
                             },
                             validateOn: 'blur'
                         },
+                        {
+                            type: 'textfield',
+                            key: 'address',
+                            label: 'Address',
+                            placeholder: ,
+                            input: true
+                        }
                     ];
+
                     const translations = {
                         language: 'en',
                         i18n: {
                             sp: {
+                                'Company Email': 'Correo electrónico',
                                 'Company Name': 'Nombre de la empresa',
-                                'Email Address': 'Correo electrónico',
                                 'Job Title': 'Cargo',
                                 'Main Phone Number': 'Número de teléfono',
                                 'Mobile Phone Number': 'Número de móvil',
                                 'Name and surname': 'Nombre y apellidos',
                                 'Profile Picture': 'Foto del perfil',
                                 'Website URL': 'Sitio Web',
-                                'Email Address must be a valid email': 'El correo electrónico es inválido',
+                                'Company Email Address must be a valid email': 'El correo electrónico es inválido',
                                 'Main Phone Number does not match the mask': 'El número de teléfono es inválido',
                                 'Mobile Phone Number does not match the mask': 'El número de móvil es inválido',
                                 'Profile picture must be a valid url': 'La foto del perfil no es una URL válida',
