@@ -256,19 +256,15 @@
                                 validateOn: 'blur'
                             },
                             {
-                                type: 'textfield',
+                                type: 'email',
                                 key: 'email',
                                 label: '<strong>Email Address</strong>',
                                 placeholder: 'green.smith@acmt.com',
                                 input: true,
-                                errorLabel: 'Invalid Email',
-                                validateOn: 'blur',
-                                validate: {
-                                    custom: ({ component, input }) => {
-                                        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                        return regex.test(input) ? '' : component.errorLabel
-                                    }
-                                }
+                                errors: {
+                                    invalid_email: 'Email Address must be a valid email'
+                                },
+                                validateOn: 'blur'
                             },
                         ]
                     }, {
@@ -283,7 +279,7 @@
                                 '<strong>Mobile Phone Number</strong>': '<strong>Número de móvil</strong>',
                                 '<strong>Name</strong>': '<strong>Nombre y apellidos</strong>',
                                 '<strong>Website URL</strong>': '<strong>Sitio Web</strong>',
-                                'Invalid Email': 'El correo electrónico es inválido',
+                                'Email Address must be a valid email': 'El correo electrónico es inválido',
                                 'Invalid Main Phone Number': 'Número de teléfono inválido',
                                 'Invalid Mobile Phone Number': 'Número de móvil inválido',
                                 'Website URL must be a valid url': 'La URL del Sitio Web es inválida'
