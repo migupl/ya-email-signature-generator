@@ -258,10 +258,7 @@
                             validateOn: 'blur'
                         },
                     ];
-
-                    Formio.createForm(document.getElementById('formio'), {
-                        components
-                    }, {
+                    const translations = {
                         language: 'en',
                         i18n: {
                             sp: {
@@ -280,9 +277,12 @@
                                 'Website URL must be a valid url': 'La URL del Sitio Web es inválida'
                             }
                         }
-                    }).then(form => {
-                        form.on('change', ({ changed }) => {
-                            const { component: { key }, value } = changed;
+                    };
+
+                    Formio.createForm(document.getElementById('formio'), { components }, translations)
+                        .then(form => {
+                            form.on('change', ({ changed }) => {
+                                const { component: { key }, value } = changed;
 
                             const el = document.getElementById(key);
                             if ('homepage' === key) {
@@ -301,10 +301,10 @@
                             }
                         });
 
-                        window.setLanguage = lang => {
-                            form.language = lang;
-                        }
-                    });
+                            window.setLanguage = lang => {
+                                form.language = lang;
+                            }
+                        });
                 })
         }
     </script>
