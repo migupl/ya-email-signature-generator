@@ -35,7 +35,7 @@
             font-weight: bold;
         }
 
-        #picture img {
+        #profile-picture {
             max-width: 150px;
             width: 150px;
         }
@@ -67,8 +67,8 @@
                 <table class="table table-borderless table-sm">
                     <tbody>
                         <tr>
-                            <td id="picture" rowspan="4">
-                                <img src="/assets/empty-profile.png" alt="">
+                            <td rowspan="4">
+                                <img id="profile-picture" src="/assets/empty-profile.png" alt="">
                             </td>
                             <td id="name">Green Smith</td>
                             <td>
@@ -187,6 +187,17 @@
                     Formio.createForm(document.getElementById('formio'), {
                         components: [
                             {
+                                type: 'url',
+                                key: 'profile-picture',
+                                label: '<strong>Profile Picture</strong>',
+                                placeholder: 'https://acmt.com/employees/f12645ff6a58e619d096afbbda394794.jpg',
+                                input: true,
+                                errors: {
+                                    invalid_url: 'Profile picture must be a valid url'
+                                },
+                                validateOn: 'blur'
+                            },
+                            {
                                 type: 'textfield',
                                 key: 'name',
                                 label: '<strong>Name and surname</strong>',
@@ -272,10 +283,12 @@
                                 '<strong>Main Phone Number</strong>': '<strong>Número de teléfono</strong>',
                                 '<strong>Mobile Phone Number</strong>': '<strong>Número de móvil</strong>',
                                 '<strong>Name and surname</strong>': '<strong>Nombre y apellidos</strong>',
+                                '<strong>Profile Picture</strong>': '<strong>Foto del perfil</strong>',
                                 '<strong>Website URL</strong>': '<strong>Sitio Web</strong>',
                                 'Email Address must be a valid email': 'El correo electrónico es inválido',
                                 'Main Phone Number does not match the mask': 'El número de teléfono es inválido',
                                 'Mobile Phone Number does not match the mask': 'El número de móvil es inválido',
+                                'Profile picture must be a valid url': 'La foto del perfil no es una URL válida',
                                 'Website URL must be a valid url': 'La URL del Sitio Web es inválida'
                             }
                         }
