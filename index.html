@@ -152,12 +152,6 @@
     <script src="https://cdn.form.io/js/formio.embed.js"></script>
     <script>
         window.onload = () => {
-            const getUrl = str => {
-                const clean = str.trim();
-                if (clean.startsWith('http')) return clean
-                return `https://${clean}`
-            }
-
             const telephoneCheck = document.createElement('input');
             telephoneCheck.type = 'tel'
             telephoneCheck.value = ''
@@ -177,6 +171,11 @@
 
             telInputIntl.promise
                 .then(() => {
+                    const getUrl = str => {
+                        const clean = str.trim();
+                        if (clean.startsWith('http')) return clean
+                        return `https://${clean}`
+                    };
                     const phoneNumberMask = telephoneCheck.placeholder.replace(/\d/g, "9");
                     const components = [
                         {
