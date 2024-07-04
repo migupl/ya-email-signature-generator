@@ -245,26 +245,15 @@
                                 }
                             },
                             {
-                                type: 'textfield',
+                                type: 'url',
                                 key: 'homepage',
                                 label: '<strong>Website URL</strong>',
                                 placeholder: 'www.acmt.com',
                                 input: true,
-                                errorLabel: 'Invalid Website URL',
-                                validateOn: 'blur',
-                                validate: {
-                                    custom: ({ component, input }) => {
-                                        try {
-                                            const url = getUrl(input);
-                                            new URL(url)
-                                        }
-                                        catch (_) {
-                                            return component.errorLabel
-                                        }
-
-                                        return ''
-                                    }
-                                }
+                                errors: {
+                                    invalid_url: 'Website URL must be a valid url'
+                                },
+                                validateOn: 'blur'
                             },
                             {
                                 type: 'textfield',
@@ -297,7 +286,7 @@
                                 'Invalid Email': 'El correo electrónico es inválido',
                                 'Invalid Main Phone Number': 'Número de teléfono inválido',
                                 'Invalid Mobile Phone Number': 'Número de móvil inválido',
-                                'Invalid Website URL': 'La URL del Sitio Web es inválida',
+                                'Website URL must be a valid url': 'La URL del Sitio Web es inválida'
                             }
                         }
                     }).then(form => {
