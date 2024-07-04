@@ -183,10 +183,6 @@
             telInputIntl.promise
                 .then(() => {
                     const phoneNumberMask = telephoneCheck.placeholder.replace(/\d/g, "9");
-                    const validatePhoneNumber = ({ component, input }) => {
-                        telephoneCheck.value = input
-                        return telInputIntl.isValidNumber() ? '' : component.errorLabel
-                    };
 
                     Formio.createForm(document.getElementById('formio'), {
                         components: [
@@ -219,30 +215,28 @@
                                 input: true
                             },
                             {
-                                type: 'textfield',
+                                type: 'phoneNumber',
                                 key: 'telephone',
                                 label: '<strong>Main Phone Number</strong>',
                                 placeholder: telephoneCheck.placeholder,
                                 input: true,
                                 inputMask: phoneNumberMask,
-                                errorLabel: 'Invalid Main Phone Number',
-                                validateOn: 'blur',
-                                validate: {
-                                    custom: validatePhoneNumber
-                                }
+                                errors: {
+                                    mask: 'Main Phone Number does not match the mask'
+                                },
+                                validateOn: 'blur'
                             },
                             {
-                                type: 'textfield',
+                                type: 'phoneNumber',
                                 key: 'mobile-phone',
                                 label: '<strong>Mobile Phone Number</strong>',
                                 placeholder: telephoneCheck.placeholder,
                                 input: true,
                                 inputMask: phoneNumberMask,
-                                errorLabel: 'Invalid Mobile Phone Number',
-                                validateOn: 'blur',
-                                validate: {
-                                    custom: validatePhoneNumber
-                                }
+                                errors: {
+                                    mask: 'Mobile Phone Number does not match the mask'
+                                },
+                                validateOn: 'blur'
                             },
                             {
                                 type: 'url',
@@ -280,8 +274,8 @@
                                 '<strong>Name</strong>': '<strong>Nombre y apellidos</strong>',
                                 '<strong>Website URL</strong>': '<strong>Sitio Web</strong>',
                                 'Email Address must be a valid email': 'El correo electrónico es inválido',
-                                'Invalid Main Phone Number': 'Número de teléfono inválido',
-                                'Invalid Mobile Phone Number': 'Número de móvil inválido',
+                                'Main Phone Number does not match the mask': 'El número de teléfono es inválido',
+                                'Mobile Phone Number does not match the mask': 'El número de móvil es inválido',
                                 'Website URL must be a valid url': 'La URL del Sitio Web es inválida'
                             }
                         }
