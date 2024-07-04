@@ -305,6 +305,9 @@
                                 el.href = 'mailto:' + value
                                 el.innerText = value
                             }
+                            else if ('profile-picture' === key) {
+                                el.src = value
+                            }
                             else {
                                 el.innerText = value
                             }
