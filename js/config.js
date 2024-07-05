@@ -1,6 +1,5 @@
 
 import { allFakers } from 'https://esm.sh/@faker-js/faker';
-import { phone, phoneNumberMask } from './intl-tel-input.js'
 
 export const formDefaults = ({ country_code, languages }) => {
     const preferedLanguage = languages.split(',')[0].replace(/-/, '_');
@@ -48,10 +47,22 @@ export const formDefaults = ({ country_code, languages }) => {
         const fullname = `${person.firstName} ${person.lastName}`;
         const job = faker.person.jobTitle();
 
+        const phone = (() => {
+            const fullPhoneNumber = faker.phone.number();
+            const phoneNumber = fullPhoneNumber.split(/[a-zA-Z]/g)[0];
+
+            const number = phoneNumber.replace(/[^\d]/g, ' ').trim();
+            const numberMask = number.replace(/\d/g, '9');
+
+            return {
+                number, numberMask
+            }
+        })();
+
         const photo = faker.image.urlLoremFlickr({ category: 'face', height: 250, width: 250 });
 
         return {
-            company, email, fullname, job, photo
+            company, email, fullname, job, phone, photo
         }
     })();
 
@@ -61,8 +72,8 @@ export const formDefaults = ({ country_code, languages }) => {
         email: employee.email,
         fullname: employee.fullname,
         jobTitle: employee.job,
-        phone: phone(),
-        phoneNumberMask: phoneNumberMask(),
+        phone: employee.phone.number,
+        phoneNumberMask: employee.phone.numberMask,
         profilePicture: employee.photo,
         website: employee.company.website
     }
