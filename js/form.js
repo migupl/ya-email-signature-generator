@@ -1,20 +1,6 @@
-window.onload = () => {
-    const telephoneCheck = document.createElement('input');
-    telephoneCheck.type = 'tel'
-    telephoneCheck.value = ''
+import { telInputIntl, phone, phoneNumberMask } from './intl-tel-input.js'
 
-    const telInputIntl = window.intlTelInput(telephoneCheck, {
-        autoPlaceholder: "aggressive",
-        initialCountry: "auto",
-        geoIpLookup: callback => {
-            fetch("https://ipapi.co/json")
-                .then(res => res.json())
-                .then(data => callback(data.country_code))
-                .catch(() => callback("us"))
-        },
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.1.0/build/js/utils.js",
-    });
-    window.intlTelInput = null
+window.onload = () => {
 
     telInputIntl.promise
         .then(() => {
@@ -30,8 +16,8 @@ window.onload = () => {
                 companyName: 'A Company Making Things',
                 fullname: 'Green Smith',
                 jobTitle: 'Software Developer',
-                phone: telephoneCheck.placeholder,
-                phoneNumberMask: telephoneCheck.placeholder.replace(/\d/g, "9"),
+                phone: phone(),
+                phoneNumberMask: phoneNumberMask(),
                 profilePicture: 'https://acmt.com/employees/f12645ff6a58e619d096afbbda394794.jpg',
                 website: 'https://acmt.com/'
             };
