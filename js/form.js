@@ -1,10 +1,10 @@
-import { connection, telInputIntl } from './intl-tel-input.js'
+import { telInputIntl } from './intl-tel-input.js'
 import { formDefaults } from './config.js'
 
 window.onload = () => {
 
     telInputIntl.promise
-        .then(() => {
+        .then(connection => {
             const defaults = formDefaults(connection);
             const getUrl = str => {
                 const clean = str.trim();
