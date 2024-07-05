@@ -2,10 +2,18 @@ const telephoneCheck = document.createElement('input');
 telephoneCheck.type = 'tel'
 telephoneCheck.value = ''
 
+let connection = {
+    country_code: 'US',
+    languages: 'en-US'
+};
+
 const getIp = callback => {
     fetch("https://ipapi.co/json")
         .then(res => res.json())
-        .then(data => callback(data.country_code))
+        .then(data => {
+            connection = { ...connection, ...data }
+            callback(data.country_code)
+        })
         .catch(() => callback("us"))
 }
 
@@ -20,4 +28,4 @@ window.intlTelInput = null
 const phone = () => telephoneCheck.placeholder;
 const phoneNumberMask = () => telephoneCheck.placeholder.replace(/\d/g, "9");
 
-export { telInputIntl, phone, phoneNumberMask }
+export { telInputIntl, connection, phone, phoneNumberMask }

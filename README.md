@@ -6,6 +6,8 @@
 
 [International Telephone Input](https://github.com/jackocnr/intl-tel-input/blob/master/README.md), a JavaScript plugin for entering and validating international telephone numbers.
 
+[Faker](https://fakerjs.dev/), a fake (but realistic) data generator.
+
 ## License
 
 [MIT license](./LICENSE)
