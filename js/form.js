@@ -1,6 +1,5 @@
-import { formDefaults } from './config.js'
+import { fakeData } from './faker.js'
 
-const defaults = formDefaults;
 const getUrl = str => {
     const clean = str.trim();
     if (clean.startsWith('http')) return clean
@@ -12,7 +11,7 @@ const components = [
         type: 'url',
         key: 'profile-picture',
         label: 'Profile Picture',
-        placeholder: defaults.profilePicture,
+        placeholder: fakeData.profilePicture,
         input: true,
         errors: {
             invalid_url: 'Profile picture must be a valid url'
@@ -23,30 +22,30 @@ const components = [
         type: 'textfield',
         key: 'name',
         label: 'Name and surname',
-        placeholder: defaults.fullname,
+        placeholder: fakeData.fullname,
         input: true
     },
     {
         type: 'textfield',
         key: 'job-title',
         label: 'Job Title',
-        placeholder: defaults.jobTitle,
+        placeholder: fakeData.jobTitle,
         input: true
     },
     {
         type: 'textfield',
         key: 'company-name',
         label: 'Company Name',
-        placeholder: defaults.companyName,
+        placeholder: fakeData.companyName,
         input: true
     },
     {
         type: 'phoneNumber',
         key: 'telephone',
         label: 'Main Phone Number',
-        placeholder: defaults.phone,
+        placeholder: fakeData.phone,
         input: true,
-        inputMask: defaults.phoneNumberMask,
+        inputMask: fakeData.phoneNumberMask,
         errors: {
             mask: 'Main Phone Number does not match the mask'
         },
@@ -56,9 +55,9 @@ const components = [
         type: 'phoneNumber',
         key: 'mobile-phone',
         label: 'Mobile Phone Number',
-        placeholder: defaults.phone,
+        placeholder: fakeData.phone,
         input: true,
-        inputMask: defaults.phoneNumberMask,
+        inputMask: fakeData.phoneNumberMask,
         errors: {
             mask: 'Mobile Phone Number does not match the mask'
         },
@@ -68,7 +67,7 @@ const components = [
         type: 'url',
         key: 'homepage',
         label: 'Website URL',
-        placeholder: defaults.website,
+        placeholder: fakeData.website,
         input: true,
         errors: {
             invalid_url: 'Website URL must be a valid url'
@@ -79,7 +78,7 @@ const components = [
         type: 'email',
         key: 'email',
         label: 'Company Email',
-        placeholder: defaults.email,
+        placeholder: fakeData.email,
         input: true,
         errors: {
             invalid_email: 'Company Email must be a valid email'
@@ -90,7 +89,7 @@ const components = [
         type: 'textfield',
         key: 'address',
         label: 'Address',
-        placeholder: defaults.address,
+        placeholder: fakeData.address,
         input: true
     }
 ];

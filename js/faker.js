@@ -19,7 +19,7 @@ try {
     console.error(error.message);
 }
 
-const formDefaults = (({ country_code, languages }) => {
+const fakeData = (({ country_code, languages }) => {
     const preferedLanguage = languages.split(',')[0].replace(/-/, '_');
     const preferedCountry = country_code.toLocaleLowerCase();
 
@@ -97,4 +97,4 @@ const formDefaults = (({ country_code, languages }) => {
     }
 })(connection);
 
-export { formDefaults }
+export { fakeData }
