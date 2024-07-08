@@ -1,7 +1,25 @@
 
 import { allFakers } from 'https://esm.sh/@faker-js/faker';
 
-export const formDefaults = ({ country_code, languages }) => {
+let connection = {
+    country_code: 'US',
+    languages: 'en-US'
+};
+
+try {
+    const response = await fetch('https://ipapi.co/json');
+    if (!response.ok) {
+        console.error(`Response status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    connection = { ...connection, ...data }
+
+} catch (error) {
+    console.error(error.message);
+}
+
+const formDefaults = (({ country_code, languages }) => {
     const preferedLanguage = languages.split(',')[0].replace(/-/, '_');
     const preferedCountry = country_code.toLocaleLowerCase();
 
@@ -77,4 +95,6 @@ export const formDefaults = ({ country_code, languages }) => {
         profilePicture: employee.photo,
         website: employee.company.website
     }
-};
+})(connection);
+
+export { formDefaults }
