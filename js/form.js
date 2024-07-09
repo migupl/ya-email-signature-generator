@@ -1,6 +1,6 @@
 import { fakeData } from './faker.js'
 
-const components = [
+const details = [
     {
         type: 'url',
         key: 'profile-picture',
@@ -136,7 +136,7 @@ const layout = {
                 {
                     label: 'Signature Details',
                     key: 'tab1',
-                    components: components
+                    components: details
                 },
                 {
                     label: 'Stylize',
@@ -181,7 +181,7 @@ const fill = ({ changed }) => updateSignature => {
     updateSignature(key, value)
 }
 
-const initilize = updateSignature => components.forEach(component => {
+const initilize = updateSignature => details.forEach(component => {
     const { key, placeholder } = component;
     updateSignature(key, placeholder)
 })
