@@ -88,6 +88,46 @@ const components = [
     }
 ];
 
+const stylize = [
+    {
+        type: 'select',
+        key: 'select',
+        label: 'Font',
+        placeholder: 'Arial',
+        data: {
+            values: [
+                {
+                    label: 'Arial',
+                    value: 'Arial, sans-serif'
+                },
+                {
+                    label: 'Courier New',
+                    value: 'Courier New, Courier, monospace'
+                },
+                {
+                    label: 'Georgia',
+                    value: 'Georgia, serif'
+                },
+                {
+                    label: 'Tahoma',
+                    value: 'Tahoma, sans-serif'
+                },
+                {
+                    label: 'Times New Roman',
+                    value: 'Times New Roman, TimesNewRoman, Times, serif'
+                }
+            ]
+        },
+        defaultValue: 'arial',
+        validate: {
+            required: true,
+            onlyAvailableItems: true
+        },
+        widget: 'html5',
+        input: true
+    }
+];
+
 const layout = {
     components: [
         {
@@ -101,7 +141,7 @@ const layout = {
                 {
                     label: 'Stylize',
                     key: 'tab2',
-                    components: []
+                    components: stylize
                 }
             ],
             key: 'tabs',
@@ -118,6 +158,7 @@ const translations = {
         sp: {
             'Company Email': 'Correo electrónico',
             'Company Name': 'Nombre de la empresa',
+            'Font': 'Tipo de letra',
             'Job Title': 'Cargo',
             'Main Phone Number': 'Número de teléfono',
             'Mobile Phone Number': 'Número de móvil',
