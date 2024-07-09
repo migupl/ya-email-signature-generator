@@ -35,6 +35,10 @@
             color: blue;
         }
 
+        p {
+            margin: 0;
+        }
+
         .signature-width {
             max-width: 450px;
         }
@@ -55,86 +59,97 @@
                     <table class="table table-borderless table-sm signature-width" style="font-family: arial;">
                         <tbody>
                             <tr>
-                                <td id="name" style="font-weight: bold;"></td>
-                                <td rowspan="7">
-                                    <img id="profile-picture" src="/assets/empty-profile.png" alt="Profile picture"
-                                        width="150" height="150">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="job-title"></td>
-                            </tr>
-                            <tr>
-                                <td id="company-name"></td>
-                            </tr>
-                            <tr>
-                                <td>
+                                <td style="vertical-align: top">
+                                    <p id="name" style="font-weight: bold;"></p>
+                                    <p id="job-title"></p>
+                                    <p id="company-name"></p>
                                     <hr>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/assets/telephone.svg" alt="Telephone icon">
-                                    <a id="telephone" href="tel:"></a>
-                                    <img src="/assets/phone.svg" alt="Mobile phone icon">
-                                    <a id="mobile-phone" href="tel:"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/assets/envelope.svg" alt="Envelope icon">
-                                    <a id="email" href="mailto:"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/assets/house.svg" alt="Home icon">
-                                    <a id="homepage" href="" target="_blank" rel="noopener noreferrer"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="/assets/geo-alt.svg" alt="Geo alt icon">
-                                    <span id="address"></span>
+                                    <p>
+                                        <img src="/assets/telephone.svg" alt="Telephone icon">
+                                        <a id="telephone" href="tel:"></a>
+                                        <img src="/assets/phone.svg" alt="Mobile phone icon">
+                                        <a id="mobile-phone" href="tel:"></a>
+                                    </p>
+                                    <p>
+                                        <img src="/assets/envelope.svg" alt="Envelope icon">
+                                        <a id="email" href="mailto:"></a>
+                                    </p>
+                                    <p>
+                                        <img src="/assets/house.svg" alt="Home icon">
+                                        <a id="homepage" href="" target="_blank" rel="noopener noreferrer"></a>
+                                    </p>
+                                    <p>
+                                        <img src="/assets/geo-alt.svg" alt="Geo alt icon">
+                                        <span id="address"></span>
+                                    </p>
                                 </td>
                                 <td>
-                                    <table class="table table-sm table-borderless mb-0">
+                                </td>
+                                <td style="vertical-align: top">
+                                    <table class="table table-borderless table-sm">
                                         <tbody>
                                             <tr>
-                                                <td id="facebook">
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/assets/facebook.svg" alt="Facebook link">
-                                                    </a>
+                                                <td style="text-align: center;">
+                                                    <img id="profile-picture" src="/assets/empty-profile.png"
+                                                        alt="Profile picture" width="150" height="150">
                                                 </td>
-                                                <td id="youtube">
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/assets/youtube.svg" alt="Youtube link">
-                                                    </a>
-                                                </td>
-                                                <td id="twitter">
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/assets/twitter-x.svg" alt="Twitter X link">
-                                                    </a>
-                                                </td>
-                                                <td id="mastodon">
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/assets/mastodon.svg" alt="Mastodon link">
-                                                    </a>
-                                                </td>
-                                                <td id="linkedin">
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/assets/linkedin.svg" alt="LinkedIn link">
-                                                    </a>
-                                                </td>
-                                                <td id="instagram">
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/assets/instagram.svg" alt="Instagram link">
-                                                    </a>
-                                                </td>
-                                                <td id="ticktock">
-                                                    <a href="" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/assets/tiktok.svg" alt="TikTok link">
-                                                    </a>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table table-sm table-borderless mb-0">
+                                                        <tbody>
+                                                            <tr style="text-align: center;">
+                                                                <td id="facebook">
+                                                                    <a href="" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <img src="/assets/facebook.svg"
+                                                                            alt="Facebook link">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="youtube">
+                                                                    <a href="" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <img src="/assets/youtube.svg"
+                                                                            alt="Youtube link">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="twitter">
+                                                                    <a href="" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <img src="/assets/twitter-x.svg"
+                                                                            alt="Twitter X link">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="mastodon">
+                                                                    <a href="" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <img src="/assets/mastodon.svg"
+                                                                            alt="Mastodon link">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="linkedin">
+                                                                    <a href="" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <img src="/assets/linkedin.svg"
+                                                                            alt="LinkedIn link">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="instagram">
+                                                                    <a href="" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <img src="/assets/instagram.svg"
+                                                                            alt="Instagram link">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="ticktock">
+                                                                    <a href="" target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <img src="/assets/tiktok.svg" alt="TikTok link">
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </td>
                                             </tr>
                                         </tbody>
