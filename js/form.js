@@ -98,6 +98,35 @@ const fill = ({ changed }) => updateSignature => {
     updateSignature(key, value)
 }
 
+const layout = {
+    components: [
+        {
+            label: 'Tabs',
+            components: [
+                {
+                    label: 'Signature Details',
+                    key: 'tab1',
+                    components: components
+                },
+                {
+                    label: 'Stylize',
+                    key: 'tab2',
+                    components: []
+                }
+            ],
+            key: 'tabs',
+            type: 'tabs',
+            input: false,
+            tableView: false
+        }
+    ]
+}
+
+const removeFormBorder = (removeBorderClass = 'border-0') => {
+    const el = formEl.querySelector('.card');
+    el.classList.add(removeBorderClass)
+}
+
 const setLanguage = lang => form.language = lang;
 
 const translations = {
@@ -111,6 +140,8 @@ const translations = {
             'Mobile Phone Number': 'Número de móvil',
             'Name and surname': 'Nombre y apellidos',
             'Profile Picture': 'Foto del perfil',
+            'Signature Details': 'Detalles de la Firma',
+            'Stylize': 'Estilo',
             'Website URL': 'Sitio Web',
             'Company Email Address must be a valid email': 'El correo electrónico es inválido',
             'Main Phone Number does not match the mask': 'El número de teléfono es inválido',
@@ -121,7 +152,9 @@ const translations = {
     }
 };
 
-let form = await Formio.createForm(document.getElementById('formio'), { components }, translations)
+const formEl = document.getElementById('formio');
+let form = await Formio.createForm(formEl, layout, translations)
+
 const signatureForm = {
     setLanguage,
     then: (signatureFill) => {
@@ -130,6 +163,7 @@ const signatureForm = {
         })
 
         initilize(signatureFill)
+        removeFormBorder()
     }
 }
 
