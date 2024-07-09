@@ -88,16 +88,6 @@ const components = [
     }
 ];
 
-const initilize = updateSignature => components.forEach(component => {
-    const { key, placeholder } = component;
-    updateSignature(key, placeholder)
-})
-
-const fill = ({ changed }) => updateSignature => {
-    const { component: { key }, value } = changed;
-    updateSignature(key, value)
-}
-
 const layout = {
     components: [
         {
@@ -122,13 +112,6 @@ const layout = {
     ]
 }
 
-const removeFormBorder = (removeBorderClass = 'border-0') => {
-    const el = formEl.querySelector('.card');
-    el.classList.add(removeBorderClass)
-}
-
-const setLanguage = lang => form.language = lang;
-
 const translations = {
     language: 'en',
     i18n: {
@@ -151,6 +134,23 @@ const translations = {
         }
     }
 };
+
+const fill = ({ changed }) => updateSignature => {
+    const { component: { key }, value } = changed;
+    updateSignature(key, value)
+}
+
+const initilize = updateSignature => components.forEach(component => {
+    const { key, placeholder } = component;
+    updateSignature(key, placeholder)
+})
+
+const removeFormBorder = (removeBorderClass = 'border-0') => {
+    const el = formEl.querySelector('.card');
+    el.classList.add(removeBorderClass)
+}
+
+const setLanguage = lang => form.language = lang;
 
 const formEl = document.getElementById('formio');
 let form = await Formio.createForm(formEl, layout, translations)
