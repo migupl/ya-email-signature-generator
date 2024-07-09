@@ -8,6 +8,8 @@ const getUrl = str => {
 
 const fillSignature = (id, value) => {
     const el = document.getElementById(id);
+    if (!el) return
+
     if ('homepage' === id) {
         el.href = getUrl(value)
         el.innerText = value
