@@ -32,6 +32,12 @@ document.addEventListener('form:font-changes', ev => {
         .forEach(el => el.style.fontFamily = ev.detail)
 })
 
+document.addEventListener('form:font-size-changes', ev => {
+    ev.stopPropagation();
+    document.querySelectorAll('[font]')
+        .forEach(el => el.style.fontSize = ev.detail)
+})
+
 window.setLanguage = signatureForm.setLanguage
 signatureForm
     .then(fillSignature);

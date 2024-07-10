@@ -151,6 +151,46 @@ const stylize = [
         },
         widget: 'html5',
         input: true
+    },
+    {
+        type: 'fieldset',
+        key: 'fieldSet',
+        label: 'Field Set',
+        components: [
+            {
+                key: 'radio',
+                type: 'radio',
+                label: 'Font Size',
+                optionsLabelPosition: 'right',
+                defaultValue: 'medium',
+                inline: true,
+                values: [
+                    {
+                        label: 'Small',
+                        value: 'small',
+                        shortcut: ''
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium',
+                        shortcut: ''
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large',
+                        shortcut: ''
+                    }
+                ],
+                validate: {
+                    custom: ({ input }) => {
+                        formEl.dispatchEvent(event('font-size-changes', input))
+                        return true
+                    }
+                },
+                input: true
+            }
+        ],
+        input: false,
     }
 ];
 
@@ -185,12 +225,16 @@ const translations = {
             'Company Email': 'Correo electrónico',
             'Company Name': 'Nombre de la empresa',
             'Font': 'Tipo de letra',
+            'Font Size': 'Tamaño de letra',
             'Job Title': 'Cargo',
+            'Large': 'Grande',
             'Main Phone Number': 'Número de teléfono',
+            'Medium': 'Medio',
             'Mobile Phone Number': 'Número de móvil',
             'Name and surname': 'Nombre y apellidos',
             'Profile Picture': 'Foto del perfil',
             'Signature Details': 'Detalles de la Firma',
+            'Small': 'Pequeño',
             'Stylize': 'Estilo',
             'Website URL': 'Sitio Web',
             'Company Email Address must be a valid email': 'El correo electrónico es inválido',
