@@ -118,7 +118,7 @@ const stylize = [
                 }
             ]
         },
-        defaultValue: 'arial',
+        defaultValue: 'Arial, sans-serif',
         validate: {
             required: true,
             onlyAvailableItems: true
