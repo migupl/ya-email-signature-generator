@@ -145,7 +145,7 @@ const stylize = [
             required: true,
             onlyAvailableItems: true,
             custom: ({ input }) => {
-                formEl.dispatchEvent(event('font-change', input))
+                formEl.dispatchEvent(event('font-changes', input))
                 return true
             }
         },

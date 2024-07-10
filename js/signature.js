@@ -26,7 +26,7 @@ const fillSignature = (id, value) => {
     }
 };
 
-document.addEventListener('form:font-change', ev => {
+document.addEventListener('form:font-changes', ev => {
     ev.stopPropagation();
     document.querySelectorAll('[font]')
         .forEach(el => el.style.fontFamily = ev.detail)
