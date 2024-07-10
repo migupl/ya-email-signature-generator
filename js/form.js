@@ -97,6 +97,10 @@ const stylize = [
         data: {
             values: [
                 {
+                    label: 'Andale Mono',
+                    value: 'Andale Mono, AndaleMono, monospace'
+                },
+                {
                     label: 'Arial',
                     value: 'Arial, sans-serif'
                 },
@@ -109,19 +113,39 @@ const stylize = [
                     value: 'Georgia, serif'
                 },
                 {
+                    label: 'Monospace',
+                    value: 'monospace'
+                },
+                {
                     label: 'Tahoma',
                     value: 'Tahoma, sans-serif'
                 },
                 {
                     label: 'Times New Roman',
                     value: 'Times New Roman, TimesNewRoman, Times, serif'
-                }
+                },
+                {
+                    label: 'Trebuchet MS',
+                    value: 'Trebuchet MS, sans-serif'
+                },
+                {
+                    label: 'Verdana',
+                    value: 'Verdana, sans-serif'
+                },
             ]
         },
         defaultValue: 'Arial, sans-serif',
         validate: {
             required: true,
-            onlyAvailableItems: true
+            onlyAvailableItems: true,
+            custom: ({ input }) => {
+                formEl.dispatchEvent(new CustomEvent('form:font-change', {
+                    bubbles: true,
+                    composed: true,
+                    detail: input
+                }));
+                return true
+            }
         },
         widget: 'html5',
         input: true

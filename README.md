@@ -8,7 +8,9 @@
 
 [Faker](https://fakerjs.dev/), a fake (but realistic) data generator.
 
-**Web Safe Fonts**[^1] Arial, Courier New, Georgia, Times New Roman are used in the Email Signature, in addition to Tahoma font.
+**Web Safe Fonts**[^1] Arial, Courier New, Georgia, Monospace, Times New Roman, Trebuchet MS and Verdana are used in the Email Signature, in addition to Andale Mono and Tahoma fonts.
+
+[A complete guide on shadow DOM and event propagation](https://pm.dartus.fr/blog/a-complete-guide-on-shadow-dom-and-event-propagation/)
 
 ## License
 
