@@ -191,6 +191,30 @@ const stylize = [
             }
         ],
         input: false,
+    },
+    {
+        type: 'textfield',
+        key: 'textColor',
+        label: 'CSS Text Color',
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 30,
+        defaultValue: 'black',
+        validateOn: 'change',
+        validate: {
+            custom: ({ input }) => {
+                const s = new Option().style;
+                s.color = /\d/.test(input) ? `#${input}` : input
+                if (s.color) {
+                    formEl.dispatchEvent(event('text-color-changes', s.color))
+                    return true
+                }
+
+                return false
+            },
+            customMessage: 'The CSS color is invalid'
+        },
+        input: true
     }
 ];
 
@@ -241,6 +265,7 @@ const translations = {
             'Main Phone Number does not match the mask': 'El número de teléfono es inválido',
             'Mobile Phone Number does not match the mask': 'El número de móvil es inválido',
             'Profile picture must be a valid url': 'La foto del perfil no es una URL válida',
+            'The CSS color is invalid': 'El código de color CSS es inválido',
             'Website URL must be a valid url': 'La URL del Sitio Web es inválida'
         }
     }
