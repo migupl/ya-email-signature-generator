@@ -88,6 +88,12 @@ const details = [
     }
 ];
 
+const event = (type, detail) => new CustomEvent(`form:${type}`, {
+    bubbles: true,
+    composed: true,
+    detail
+});
+
 const stylize = [
     {
         type: 'select',
@@ -139,11 +145,7 @@ const stylize = [
             required: true,
             onlyAvailableItems: true,
             custom: ({ input }) => {
-                formEl.dispatchEvent(new CustomEvent('form:font-change', {
-                    bubbles: true,
-                    composed: true,
-                    detail: input
-                }));
+                formEl.dispatchEvent(event('font-change', input))
                 return true
             }
         },
