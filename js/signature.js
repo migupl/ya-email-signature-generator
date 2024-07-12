@@ -26,43 +26,27 @@ const fillSignature = (id, value) => {
     }
 };
 
-document.addEventListener('form:font-changes', ev => {
-    ev.stopPropagation();
-    document.querySelectorAll('[font]')
-        .forEach(el => el.style.fontFamily = ev.detail)
-})
+const change = attribute => value => el => {
+    el.style[attribute] = value
+};
+const fontChangeTypes = {
+    font: { attribute: 'font', action: change('fontFamily') },
+    'font-size': { attribute: 'font', action: change('fontSize') },
+    'social-color': { attribute: 'social-color', action: change('backgroundColor') },
+    'text-color': { attribute: 'font', action: change('color') },
+    'theme-color': {
+        attribute: 'theme-color',
+        action: value => el => change('img' === el.localName ? 'backgroundColor' : 'color')(value)(el)
+    }
+};
 
-document.addEventListener('form:font-size-changes', ev => {
-    ev.stopPropagation();
-    document.querySelectorAll('[font]')
-        .forEach(el => el.style.fontSize = ev.detail)
-})
+document.addEventListener('form:change', ev => {
+    const { type, value } = ev.detail;
+    const { attribute, action } = fontChangeTypes[type];
 
-document.addEventListener('form:text-color-changes', ev => {
     ev.stopPropagation();
-    document.querySelectorAll('[font]')
-        .forEach(el => {
-            el.style.color = ev.detail
-        })
-})
-
-document.addEventListener('form:theme-color-changes', ev => {
-    ev.stopPropagation();
-    document.querySelectorAll('[theme-color]')
-        .forEach(el => {
-            if ('img' === el.localName)
-                el.style.backgroundColor = ev.detail
-            else
-                el.style.color = ev.detail
-        })
-})
-
-document.addEventListener('form:social-color-changes', ev => {
-    ev.stopPropagation();
-    document.querySelectorAll('[social-color]')
-        .forEach(el => {
-            el.style.backgroundColor = ev.detail
-        })
+    document.querySelectorAll(`[${attribute}]`)
+        .forEach(action(value))
 })
 
 window.setLanguage = signatureForm.setLanguage

@@ -91,19 +91,17 @@ const details = [
 const emitEventOnValidColor = eventType => ({ input }) => {
     const s = new Option().style;
     s.color = /\d/.test(input) ? `#${input}` : input;
-    if (s.color) {
-        formEl.dispatchEvent(event(eventType, s.color))
-        return true
-    }
-
-    return false
+    return s.color ? emitEvent(eventType, s.color) : false
 }
 
-const event = (type, detail) => new CustomEvent(`form:${type}`, {
-    bubbles: true,
-    composed: true,
-    detail
-});
+const emitEvent = (type, value) => {
+    formEl.dispatchEvent(new CustomEvent('form:change', {
+        bubbles: true,
+        composed: true,
+        detail: { type, value }
+    }))
+    return true
+}
 
 const stylize = [
     {
@@ -155,10 +153,7 @@ const stylize = [
         validate: {
             required: true,
             onlyAvailableItems: true,
-            custom: ({ input }) => {
-                formEl.dispatchEvent(event('font-changes', input))
-                return true
-            }
+            custom: ({ input }) => emitEvent('font', input)
         },
         widget: 'html5',
         input: true
@@ -193,10 +188,7 @@ const stylize = [
                     }
                 ],
                 validate: {
-                    custom: ({ input }) => {
-                        formEl.dispatchEvent(event('font-size-changes', input))
-                        return true
-                    }
+                    custom: ({ input }) => emitEvent('font-size', input)
                 },
                 input: true
             }
@@ -213,7 +205,7 @@ const stylize = [
         defaultValue: 'black',
         validateOn: 'change',
         validate: {
-            custom: emitEventOnValidColor('text-color-changes'),
+            custom: emitEventOnValidColor('text-color'),
             customMessage: 'The CSS color is invalid'
         },
         input: true
@@ -228,7 +220,7 @@ const stylize = [
         defaultValue: 'SlateGrey',
         validateOn: 'change',
         validate: {
-            custom: emitEventOnValidColor('theme-color-changes'),
+            custom: emitEventOnValidColor('theme-color'),
             customMessage: 'The CSS color is invalid'
         },
         input: true
@@ -243,7 +235,7 @@ const stylize = [
         defaultValue: 'DarkBlue',
         validateOn: 'change',
         validate: {
-            custom: emitEventOnValidColor('social-color-changes'),
+            custom: emitEventOnValidColor('social-color'),
             customMessage: 'The CSS color is invalid'
         },
         input: true
