@@ -51,28 +51,26 @@ const details = [
         input: true
     },
     {
-        type: 'phoneNumber',
+        type: 'textfield',
         key: 'telephone',
         label: 'Main Phone Number',
         placeholder: fakeData.phone,
         input: true,
-        inputMask: fakeData.phoneNumberMask,
-        errors: {
-            mask: 'Main Phone Number does not match the mask'
-        },
-        validateOn: 'blur'
+        validateOn: 'change',
+        validate: {
+            custom: fill
+        }
     },
     {
-        type: 'phoneNumber',
+        type: 'textfield',
         key: 'mobile-phone',
         label: 'Mobile Phone Number',
         placeholder: fakeData.phone,
         input: true,
-        inputMask: fakeData.phoneNumberMask,
-        errors: {
-            mask: 'Mobile Phone Number does not match the mask'
-        },
-        validateOn: 'blur'
+        validateOn: 'change',
+        validate: {
+            custom: fill
+        }
     },
     {
         type: 'url',
@@ -303,8 +301,6 @@ const translations = {
             'Stylize': 'Estilo',
             'Website URL': 'Sitio Web',
             'Company Email Address must be a valid email': 'El correo electrónico es inválido',
-            'Main Phone Number does not match the mask': 'El número de teléfono es inválido',
-            'Mobile Phone Number does not match the mask': 'El número de móvil es inválido',
             'Profile picture must be a valid url': 'La foto del perfil no es una URL válida',
             'The CSS color is invalid': 'El código de color CSS es inválido',
             'Website URL must be a valid url': 'La URL del Sitio Web es inválida'

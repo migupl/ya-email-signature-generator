@@ -21,6 +21,10 @@ const fillSignature = (id, value) => {
     else if ('profile-picture' === id) {
         el.src = value
     }
+    else if ('telephone' === id || 'mobile-phone' ===id) {
+        el.href = 'tel:' + value.replace(/\s/g, '')
+        el.innerText = value
+    }
     else {
         el.innerText = value
     }
