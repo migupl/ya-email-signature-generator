@@ -57,6 +57,14 @@ document.addEventListener('form:theme-color-changes', ev => {
         })
 })
 
+document.addEventListener('form:social-color-changes', ev => {
+    ev.stopPropagation();
+    document.querySelectorAll('[social-color]')
+        .forEach(el => {
+            el.style.backgroundColor = ev.detail
+        })
+})
+
 window.setLanguage = signatureForm.setLanguage
 signatureForm
     .then(fillSignature);

@@ -239,6 +239,30 @@ const stylize = [
             customMessage: 'The CSS color is invalid'
         },
         input: true
+    },
+    {
+        type: 'textfield',
+        key: 'socialColor',
+        label: 'CSS Social Color',
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 30,
+        defaultValue: 'DarkBlue',
+        validateOn: 'change',
+        validate: {
+            custom: ({ input }) => {
+                const s = new Option().style;
+                s.color = /\d/.test(input) ? `#${input}` : input
+                if (s.color) {
+                    formEl.dispatchEvent(event('social-color-changes', s.color))
+                    return true
+                }
+
+                return false
+            },
+            customMessage: 'The CSS color is invalid'
+        },
+        input: true
     }
 ];
 
