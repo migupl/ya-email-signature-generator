@@ -1,5 +1,22 @@
 import { fakeData } from './faker.js'
 
+const fill = ({ changed }) => updateSignature => {
+    const { component: { key }, value } = changed;
+    updateSignature(key, value)
+}
+
+const initilize = updateSignature => details.forEach(component => {
+    const { key, placeholder } = component;
+    updateSignature(key, placeholder)
+})
+
+const removeFormBorder = (removeBorderClass = 'border-0') => {
+    const el = formEl.querySelector('.card');
+    el.classList.add(removeBorderClass)
+}
+
+const setLanguage = lang => form.language = lang;
+
 const details = [
     {
         type: 'url',
@@ -294,23 +311,6 @@ const translations = {
         }
     }
 };
-
-const fill = ({ changed }) => updateSignature => {
-    const { component: { key }, value } = changed;
-    updateSignature(key, value)
-}
-
-const initilize = updateSignature => details.forEach(component => {
-    const { key, placeholder } = component;
-    updateSignature(key, placeholder)
-})
-
-const removeFormBorder = (removeBorderClass = 'border-0') => {
-    const el = formEl.querySelector('.card');
-    el.classList.add(removeBorderClass)
-}
-
-const setLanguage = lang => form.language = lang;
 
 const formEl = document.getElementById('formio');
 let form = await Formio.createForm(formEl, layout, translations)
