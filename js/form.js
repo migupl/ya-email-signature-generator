@@ -88,6 +88,17 @@ const details = [
     }
 ];
 
+const emitEventOnValidColor = eventType => ({ input }) => {
+    const s = new Option().style;
+    s.color = /\d/.test(input) ? `#${input}` : input;
+    if (s.color) {
+        formEl.dispatchEvent(event(eventType, s.color))
+        return true
+    }
+
+    return false
+}
+
 const event = (type, detail) => new CustomEvent(`form:${type}`, {
     bubbles: true,
     composed: true,
@@ -202,16 +213,7 @@ const stylize = [
         defaultValue: 'black',
         validateOn: 'change',
         validate: {
-            custom: ({ input }) => {
-                const s = new Option().style;
-                s.color = /\d/.test(input) ? `#${input}` : input
-                if (s.color) {
-                    formEl.dispatchEvent(event('text-color-changes', s.color))
-                    return true
-                }
-
-                return false
-            },
+            custom: emitEventOnValidColor('text-color-changes'),
             customMessage: 'The CSS color is invalid'
         },
         input: true
@@ -226,16 +228,7 @@ const stylize = [
         defaultValue: 'SlateGrey',
         validateOn: 'change',
         validate: {
-            custom: ({ input }) => {
-                const s = new Option().style;
-                s.color = /\d/.test(input) ? `#${input}` : input
-                if (s.color) {
-                    formEl.dispatchEvent(event('theme-color-changes', s.color))
-                    return true
-                }
-
-                return false
-            },
+            custom: emitEventOnValidColor('theme-color-changes'),
             customMessage: 'The CSS color is invalid'
         },
         input: true
@@ -250,16 +243,7 @@ const stylize = [
         defaultValue: 'DarkBlue',
         validateOn: 'change',
         validate: {
-            custom: ({ input }) => {
-                const s = new Option().style;
-                s.color = /\d/.test(input) ? `#${input}` : input
-                if (s.color) {
-                    formEl.dispatchEvent(event('social-color-changes', s.color))
-                    return true
-                }
-
-                return false
-            },
+            custom: emitEventOnValidColor('social-color-changes'),
             customMessage: 'The CSS color is invalid'
         },
         input: true
