@@ -46,6 +46,17 @@ document.addEventListener('form:text-color-changes', ev => {
         })
 })
 
+document.addEventListener('form:theme-color-changes', ev => {
+    ev.stopPropagation();
+    document.querySelectorAll('[theme-color]')
+        .forEach(el => {
+            if ('img' === el.localName)
+                el.style.backgroundColor = ev.detail
+            else
+                el.style.color = ev.detail
+        })
+})
+
 window.setLanguage = signatureForm.setLanguage
 signatureForm
     .then(fillSignature);

@@ -215,6 +215,30 @@ const stylize = [
             customMessage: 'The CSS color is invalid'
         },
         input: true
+    },
+    {
+        type: 'textfield',
+        key: 'themeColor',
+        label: 'CSS Theme Color',
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 30,
+        defaultValue: 'SlateGrey',
+        validateOn: 'change',
+        validate: {
+            custom: ({ input }) => {
+                const s = new Option().style;
+                s.color = /\d/.test(input) ? `#${input}` : input
+                if (s.color) {
+                    formEl.dispatchEvent(event('theme-color-changes', s.color))
+                    return true
+                }
+
+                return false
+            },
+            customMessage: 'The CSS color is invalid'
+        },
+        input: true
     }
 ];
 
