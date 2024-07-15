@@ -55,8 +55,16 @@ document.addEventListener('form:change', ev => {
     ev.stopPropagation();
     document.querySelectorAll(`[${attribute}]`)
         .forEach(action(value))
-})
+});
 
-window.setLanguage = signatureForm.setLanguage
-signatureForm
-    .then(fillSignature);
+const onLoadForm = (() => {
+    window.setLanguage = signatureForm.setLanguage
+    signatureForm
+        .then(fillSignature);
+
+    const card = document.getElementById('signature-card');
+    card.style.display = 'block'
+
+    const spinner = document.getElementById('spinner');
+    spinner.style.display = 'none'
+})();
