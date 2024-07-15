@@ -285,8 +285,12 @@ const translations = {
     language: 'en',
     i18n: {
         sp: {
+            'Address': 'Dirección',
             'Company Email': 'Correo electrónico',
             'Company Name': 'Nombre de la empresa',
+            'CSS Social Color': 'Color CSS iconos sociales',
+            'CSS Text Color': 'Color CSS del texto',
+            'CSS Theme Color': 'Color CSS del tema',
             'Font': 'Tipo de letra',
             'Font Size': 'Tamaño de letra',
             'Job Title': 'Cargo',
