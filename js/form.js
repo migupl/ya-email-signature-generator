@@ -23,11 +23,11 @@ const details = [
         key: 'profile-picture',
         label: 'Profile Picture',
         placeholder: fakeData.profilePicture,
-        input: true,
         errors: {
             invalid_url: 'Profile picture must be a valid url'
         },
-        validateOn: 'blur'
+        validateOn: 'blur',
+        input: true,
     },
     {
         type: 'textfield',
@@ -254,6 +254,27 @@ const stylize = [
             customMessage: 'The CSS color is invalid'
         },
         input: true
+    },
+    {
+        type: 'number',
+        key: 'number',
+        label: 'Picture border radius',
+        defaultValue: 15,
+        requireDecimal: false,
+        truncateMultipleSpaces: false,
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 50,
+        mask: false,
+        validateOn: 'change',
+        validate: {
+            min: 0,
+            max: 50,
+            custom: ({ input }) => emitEvent('profile-border-radius', input),
+            customMessage: 'Number must be a value between 0 and 50'
+        },
+        inputFormat: 'plain',
+        input: true
     }
 ];
 
@@ -299,6 +320,8 @@ const translations = {
             'Medium': 'Medio',
             'Mobile Phone Number': 'Número de móvil',
             'Name and surname': 'Nombre y apellidos',
+            'Number must be a value between 0 and 50': 'El número debe ser un valor entre 0 y 50',
+            'Picture border radius': 'Curbatura del radio de la imagen',
             'Profile Picture': 'Foto del perfil',
             'Signature Details': 'Detalles de la Firma',
             'Small': 'Pequeño',

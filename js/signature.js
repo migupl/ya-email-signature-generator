@@ -33,9 +33,13 @@ const fillSignature = (id, value) => {
 const change = attribute => value => el => {
     el.style[attribute] = value
 };
-const fontChangeTypes = {
+const layoutChangeTypes = {
     font: { attribute: 'font', action: change('fontFamily') },
     'font-size': { attribute: 'font', action: change('fontSize') },
+    'profile-border-radius': {
+        attribute: 'profile-radius',
+        action: value => el =>  change('borderRadius')(`${value}%`)(el)
+    },
     'social-color': { attribute: 'social-color', action: change('backgroundColor') },
     'text-color': { attribute: 'font', action: change('color') },
     'theme-color': {
@@ -46,7 +50,7 @@ const fontChangeTypes = {
 
 document.addEventListener('form:change', ev => {
     const { type, value } = ev.detail;
-    const { attribute, action } = fontChangeTypes[type];
+    const { attribute, action } = layoutChangeTypes[type];
 
     ev.stopPropagation();
     document.querySelectorAll(`[${attribute}]`)
