@@ -65,22 +65,19 @@ const fakeData = (({ country_code, languages }) => {
         const fullname = `${person.firstName} ${person.lastName}`;
         const job = faker.person.jobTitle();
 
-        const phone = (() => {
+        const phoneNumber = (() => {
             const fullPhoneNumber = faker.phone.number();
             const phoneNumber = fullPhoneNumber.split(/[a-zA-Z]/g)[0];
 
             const number = phoneNumber.replace(/[^\d]/g, ' ').trim();
-            const numberMask = number.replace(/\d/g, '9');
 
-            return {
-                number, numberMask
-            }
+            return number
         })();
 
         const photo = faker.image.urlLoremFlickr({ category: 'face', height: 250, width: 250 });
 
         return {
-            company, email, fullname, job, phone, photo
+            company, email, fullname, job, phoneNumber, photo
         }
     })();
 
@@ -90,8 +87,7 @@ const fakeData = (({ country_code, languages }) => {
         email: employee.email,
         fullname: employee.fullname,
         jobTitle: employee.job,
-        phone: employee.phone.number,
-        phoneNumberMask: employee.phone.numberMask,
+        phone: employee.phoneNumber,
         profilePicture: employee.photo,
         website: employee.company.website
     }
