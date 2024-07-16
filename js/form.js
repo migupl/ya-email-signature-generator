@@ -131,6 +131,22 @@ const emitEvent = (type, value) => {
     return true
 }
 
+const social = ['Facebook', 'Instagram', 'LinkedIn', 'Mastodon', 'TikTok', 'Twitter X', 'Youtube']
+    .reduce((arr, socialName) => {
+        const key = socialName.toLowerCase().replace(/\s/g, '-');
+        arr.push({
+            type: 'url',
+            key: key,
+            label: socialName,
+            errors: {
+                invalid_url: 'Must be a valir url'
+            },
+            validateOn: 'blur',
+            input: true,
+        })
+        return arr
+    }, []);
+
 const stylize = [
     {
         type: 'select',
@@ -303,7 +319,7 @@ const layout = {
                 {
                     label: 'Social Nets',
                     key: 'tab3',
-                    components: []
+                    components: social
                 },
                 {
                     label: 'Stylize',
@@ -337,6 +353,7 @@ const translations = {
             'Medium': 'Medio',
             'Mobile Phone Number': 'Número de móvil',
             'Name and surname': 'Nombre y apellidos',
+            'Must be a valir url': 'Debe ser una url válida',
             'Number must be a value between 0 and 50': 'El número debe ser un valor entre 0 y 50',
             'Picture border radius': 'Curbatura del radio de la imagen',
             'Profile Picture': 'Foto del perfil',
