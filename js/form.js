@@ -1,6 +1,16 @@
 const fakeData = await (async fakerLib => {
+    const storageKey = 'yaEsgState';
+    const sessionSavedData = sessionStorage.getItem(storageKey);
+
+    if (sessionSavedData) {
+        return JSON.parse(sessionSavedData)
+    }
+
     const lib = await import(fakerLib);
-    return lib.fakeData
+    const data = await lib.fakeData;
+
+    sessionStorage.setItem(storageKey, JSON.stringify(data))
+    return data
 })('./faker.js');
 
 const fill = ({ changed }) => updateSignature => {
