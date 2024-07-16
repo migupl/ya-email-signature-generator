@@ -1,4 +1,7 @@
-import { fakeData } from './faker.js'
+const fakeData = await (async fakerLib => {
+    const lib = await import(fakerLib);
+    return lib.fakeData
+})('./faker.js');
 
 const fill = ({ changed }) => updateSignature => {
     const { component: { key }, value } = changed;
