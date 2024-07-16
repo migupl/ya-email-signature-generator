@@ -18,10 +18,17 @@ const fill = ({ changed }) => updateSignature => {
     updateSignature(key, value)
 }
 
-const initilize = updateSignature => details.forEach(component => {
-    const { key, placeholder } = component;
-    updateSignature(key, placeholder)
-})
+const initilize = updateSignature => {
+    details.forEach(component => {
+        const { key, placeholder } = component;
+        updateSignature(key, placeholder)
+    })
+
+    stylize.forEach(component => {
+        const applyStyle = component.validate?.custom || component.components[0].validate.custom;
+        applyStyle({ input: component.defaultValue })
+    })
+}
 
 const removeFormBorder = (removeBorderClass = 'border-0') => {
     const el = formEl.querySelector('.card');
