@@ -179,7 +179,6 @@ const stylize = [
         },
         defaultValue: 'Arial, sans-serif',
         validate: {
-            required: true,
             onlyAvailableItems: true,
             custom: ({ input }) => emitEvent('font', input)
         },
