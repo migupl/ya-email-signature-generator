@@ -25,6 +25,9 @@ const fillSignature = (id, value) => {
         el.href = 'tel:' + value.replace(/\s/g, '')
         el.innerText = value
     }
+    else if ('a' === el.localName) {
+        el.href = getUrl(value)
+    }
     else {
         el.innerText = value
     }
