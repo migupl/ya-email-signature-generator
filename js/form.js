@@ -301,6 +301,11 @@ const layout = {
                     components: details
                 },
                 {
+                    label: 'Social Nets',
+                    key: 'tab3',
+                    components: []
+                },
+                {
                     label: 'Stylize',
                     key: 'tab2',
                     components: stylize
@@ -337,6 +342,7 @@ const translations = {
             'Profile Picture': 'Foto del perfil',
             'Signature Details': 'Detalles de la Firma',
             'Small': 'Pequeño',
+            'Social Nets': 'Redes sociales',
             'Stylize': 'Estilo',
             'Website URL': 'Sitio Web',
             'Company Email Address must be a valid email': 'El correo electrónico es inválido',
