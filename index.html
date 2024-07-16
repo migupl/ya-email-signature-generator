@@ -26,135 +26,133 @@
             height: 100%;
         }
 
-        #mobile:before {
-            content: "|";
-        }
-
-        #name {
-            font-weight: bold;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
         a:hover {
             color: blue;
+        }
+
+        .signature-width {
+            max-width: 450px;
         }
     </style>
 </head>
 <body>
     <div class="d-flex flex-row justify-content-start h-100">
         <div class="w-25 bg-light">
-            <h2>Complete Your Signature Details</h2>
-            <div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary" onclick="setLanguage('sp')">Español</button>
-                    <button type="button" class="btn btn-primary" onclick="setLanguage('en')">English</button>
-                </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" onclick="setLanguage('sp')">Español</button>
+                <button type="button" class="btn btn-primary" onclick="setLanguage('en')">English</button>
             </div>
             <div id="formio"></div>
         </div>
         <div class="d-flex flex-row justify-content-center align-items-center w-75">
             <div class="d-flex flex-column justify-content-center h-100">
-                <table class="table table-borderless table-sm">
-                    <tbody>
-                        <tr>
-                            <td id="name"></td>
-                            <td rowspan="7">
-                                <img id="profile-picture" src="/assets/empty-profile.png" alt="" width="150"
-                                    height="150">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="job-title"></td>
-                        </tr>
-                        <tr>
-                            <td id="company-name"></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <hr>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="/assets/telephone.svg" alt="Telephone icon">
-                                <a id="telephone" href="tel:"></a>
-                                <img src="/assets/phone.svg" alt="Mobile phone icon">
-                                <a id="mobile-phone" href="tel:"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="/assets/envelope.svg" alt="Envelope icon">
-                                <a id="email" href="mailto:"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="/assets/house.svg" alt="Home icon">
-                                <a id="homepage" href="" target="_blank" rel="noopener noreferrer"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="address">
-                                <img src="/assets/geo-alt.svg" alt="Geo alt icon">
-                                <a href="" target="_blank" rel="noopener noreferrer"> line 1, line 2, line 3, line
-                                    4</a>
-                            </td>
-                            <td>
-                                <table class="table table-sm table-borderless mb-0">
-                                    <tbody>
-                                        <tr>
-                                            <td id="facebook">
-                                                <a href="" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/assets/facebook.svg" alt="Facebook icon">
-                                                </a>
-                                            </td>
-                                            <td id="youtube">
-                                                <a href="" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/assets/youtube.svg" alt="Youtube icon">
-                                                </a>
-                                            </td>
-                                            <td id="twitter">
-                                                <a href="" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/assets/twitter-x.svg" alt="Twitter X icon">
-                                                </a>
-                                            </td>
-                                            <td id="mastodon">
-                                                <a href="" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/assets/mastodon.svg" alt="Mastodon icon">
-                                                </a>
-                                            </td>
-                                            <td id="linkedin">
-                                                <a href="" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/assets/linkedin.svg" alt="LinkedIn icon">
-                                                </a>
-                                            </td>
-                                            <td id="instagram">
-                                                <a href="" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/assets/instagram.svg" alt="Instagram icon">
-                                                </a>
-                                            </td>
-                                            <td id="ticktock">
-                                                <a href="" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/assets/tiktok.svg" alt="TikTok icon">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div id="spinner" class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div id="signature-card" class="border border-2 border-secondary-subtle rounded p-5" style="display: none;">
+                    <table class="table table-borderless table-sm signature-width">
+                        <tbody>
+                            <tr>
+                                <td font style="color: black; font-family: Arial, sans-serif; font-size: medium; vertical-align: top;">
+                                    <p id="name" style="font-size: 1em; font-weight: bold; margin: 0;"></p>
+                                    <p id="job-title" style="font-size: smaller; margin: 0;"></p>
+                                    <p id="company-name" style="font-size: smaller; margin: 0;"></p>
+                                    <hr theme-color style="color: SlateGrey">
+                                    <p style="font-size: smaller; margin: 0;">
+                                        <img theme-color src="/assets/telephone.png" alt="Telephone icon" style="background-color: SlateGrey">
+                                        <a id="telephone" href="tel:"
+                                            style="color: inherit; text-decoration: inherit;"></a>
+                                        <img theme-color src="/assets/phone.png" alt="Mobile phone icon" style="background-color: SlateGrey">
+                                        <a id="mobile-phone" href="tel:"
+                                            style="color: inherit; text-decoration: inherit;"></a>
+                                    </p>
+                                    <p style="font-size: smaller; margin: 0;">
+                                        <img theme-color src="/assets/envelope.png" alt="Envelope icon" style="background-color: SlateGrey">
+                                        <a id="email" href="mailto:"
+                                            style="color: inherit; text-decoration: inherit;"></a>
+                                    </p>
+                                    <p style="font-size: smaller; margin: 0;">
+                                        <img theme-color src="/assets/house.png" alt="Home icon" style="background-color: SlateGrey">
+                                        <a id="homepage" href="" target="_blank" rel="noopener noreferrer"
+                                            style="color: inherit; text-decoration: inherit;"></a>
+                                    </p>
+                                    <p style="font-size: smaller; margin: 0;">
+                                        <img theme-color src="/assets/geo-alt.png" alt="Location icon" style="background-color: SlateGrey">
+                                        <span id="address"></span>
+                                    </p>
+                                </td>
+                                <td style="width: 25px;">
+                                </td>
+                                <td style="vertical-align: top">
+                                    <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: center;">
+                                                    <img profile-radius id="profile-picture" src="/assets/empty-profile.png"
+                                                        alt="Profile picture" width="150" height="150" style="border-radius: 15%">
+                                                </td>
+                                            </tr>
+                                            <tr style="height: 15px;"></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table table-sm table-borderless mb-0">
+                                                        <tbody>
+                                                            <tr style="text-align: center;">
+                                                                <td id="facebook">
+                                                                    <a href="" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: inherit;">
+                                                                        <img social-color src="/assets/facebook.png" alt="Facebook" style="background-color: DarkBlue">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="youtube">
+                                                                    <a href="" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: inherit;">
+                                                                        <img social-color src="/assets/youtube.png" alt="Youtube" style="background-color: DarkBlue">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="twitter">
+                                                                    <a href="" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: inherit;">
+                                                                        <img social-color src="/assets/twitter-x.png" alt="Twitter X" style="background-color: DarkBlue">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="mastodon">
+                                                                    <a href="" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: inherit;">
+                                                                        <img social-color src="/assets/mastodon.png" alt="Mastodon" style="background-color: DarkBlue">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="linkedin">
+                                                                    <a href="" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: inherit;">
+                                                                        <img social-color src="/assets/linkedin.png" alt="LinkedIn" style="background-color: DarkBlue">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="instagram">
+                                                                    <a href="" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: inherit;">
+                                                                        <img social-color src="/assets/instagram.png" alt="Instagram" style="background-color: DarkBlue">
+                                                                    </a>
+                                                                </td>
+                                                                <td id="ticktock">
+                                                                    <a href="" target="_blank" rel="noopener noreferrer"
+                                                                        style="color: inherit; text-decoration: inherit;">
+                                                                        <img social-color src="/assets/tiktok.png" alt="TikTok" style="background-color: DarkBlue">
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.form.io/js/formio.embed.min.js"></script>
-    <script type="module" src="/js/form.js"></script>
+    <script type="module" src="/js/signature.js"></script>
 </body>
 </html>

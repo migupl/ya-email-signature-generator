@@ -1,22 +1,33 @@
 import { fakeData } from './faker.js'
 
-const getUrl = str => {
-    const clean = str.trim();
-    if (clean.startsWith('http')) return clean
-    return `https://${clean}`
-};
+const fill = ({ changed }) => updateSignature => {
+    const { component: { key }, value } = changed;
+    updateSignature(key, value)
+}
 
-const components = [
+const initilize = updateSignature => details.forEach(component => {
+    const { key, placeholder } = component;
+    updateSignature(key, placeholder)
+})
+
+const removeFormBorder = (removeBorderClass = 'border-0') => {
+    const el = formEl.querySelector('.card');
+    el.classList.add(removeBorderClass)
+}
+
+const setLanguage = lang => form.language = lang;
+
+const details = [
     {
         type: 'url',
         key: 'profile-picture',
         label: 'Profile Picture',
         placeholder: fakeData.profilePicture,
-        input: true,
         errors: {
             invalid_url: 'Profile picture must be a valid url'
         },
-        validateOn: 'blur'
+        validateOn: 'blur',
+        input: true,
     },
     {
         type: 'textfield',
@@ -40,28 +51,26 @@ const components = [
         input: true
     },
     {
-        type: 'phoneNumber',
+        type: 'textfield',
         key: 'telephone',
         label: 'Main Phone Number',
         placeholder: fakeData.phone,
         input: true,
-        inputMask: fakeData.phoneNumberMask,
-        errors: {
-            mask: 'Main Phone Number does not match the mask'
-        },
-        validateOn: 'blur'
+        validateOn: 'change',
+        validate: {
+            custom: fill
+        }
     },
     {
-        type: 'phoneNumber',
+        type: 'textfield',
         key: 'mobile-phone',
         label: 'Mobile Phone Number',
         placeholder: fakeData.phone,
         input: true,
-        inputMask: fakeData.phoneNumberMask,
-        errors: {
-            mask: 'Mobile Phone Number does not match the mask'
-        },
-        validateOn: 'blur'
+        validateOn: 'change',
+        validate: {
+            custom: fill
+        }
     },
     {
         type: 'url',
@@ -94,59 +103,251 @@ const components = [
     }
 ];
 
+const emitEventOnValidColor = eventType => ({ input }) => {
+    const s = new Option().style;
+    s.color = /\d/.test(input) ? `#${input}` : input;
+    return s.color ? emitEvent(eventType, s.color) : false
+}
+
+const emitEvent = (type, value) => {
+    formEl.dispatchEvent(new CustomEvent('form:change', {
+        bubbles: true,
+        composed: true,
+        detail: { type, value }
+    }))
+    return true
+}
+
+const stylize = [
+    {
+        type: 'select',
+        key: 'select',
+        label: 'Font',
+        placeholder: 'Arial',
+        data: {
+            values: [
+                {
+                    label: 'Andale Mono',
+                    value: 'Andale Mono, AndaleMono, monospace'
+                },
+                {
+                    label: 'Arial',
+                    value: 'Arial, sans-serif'
+                },
+                {
+                    label: 'Courier New',
+                    value: 'Courier New, Courier, monospace'
+                },
+                {
+                    label: 'Georgia',
+                    value: 'Georgia, serif'
+                },
+                {
+                    label: 'Monospace',
+                    value: 'monospace'
+                },
+                {
+                    label: 'Tahoma',
+                    value: 'Tahoma, sans-serif'
+                },
+                {
+                    label: 'Times New Roman',
+                    value: 'Times New Roman, TimesNewRoman, Times, serif'
+                },
+                {
+                    label: 'Trebuchet MS',
+                    value: 'Trebuchet MS, sans-serif'
+                },
+                {
+                    label: 'Verdana',
+                    value: 'Verdana, sans-serif'
+                },
+            ]
+        },
+        defaultValue: 'Arial, sans-serif',
+        validate: {
+            required: true,
+            onlyAvailableItems: true,
+            custom: ({ input }) => emitEvent('font', input)
+        },
+        widget: 'html5',
+        input: true
+    },
+    {
+        type: 'fieldset',
+        key: 'fieldSet',
+        label: 'Field Set',
+        components: [
+            {
+                key: 'radio',
+                type: 'radio',
+                label: 'Font Size',
+                optionsLabelPosition: 'right',
+                defaultValue: 'medium',
+                inline: true,
+                values: [
+                    {
+                        label: 'Small',
+                        value: 'small',
+                        shortcut: ''
+                    },
+                    {
+                        label: 'Medium',
+                        value: 'medium',
+                        shortcut: ''
+                    },
+                    {
+                        label: 'Large',
+                        value: 'large',
+                        shortcut: ''
+                    }
+                ],
+                validate: {
+                    custom: ({ input }) => emitEvent('font-size', input)
+                },
+                input: true
+            }
+        ],
+        input: false,
+    },
+    {
+        type: 'textfield',
+        key: 'textColor',
+        label: 'CSS Text Color',
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 30,
+        defaultValue: 'black',
+        validateOn: 'change',
+        validate: {
+            custom: emitEventOnValidColor('text-color'),
+            customMessage: 'The CSS color is invalid'
+        },
+        input: true
+    },
+    {
+        type: 'textfield',
+        key: 'themeColor',
+        label: 'CSS Theme Color',
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 30,
+        defaultValue: 'SlateGrey',
+        validateOn: 'change',
+        validate: {
+            custom: emitEventOnValidColor('theme-color'),
+            customMessage: 'The CSS color is invalid'
+        },
+        input: true
+    },
+    {
+        type: 'textfield',
+        key: 'socialColor',
+        label: 'CSS Social Color',
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 30,
+        defaultValue: 'DarkBlue',
+        validateOn: 'change',
+        validate: {
+            custom: emitEventOnValidColor('social-color'),
+            customMessage: 'The CSS color is invalid'
+        },
+        input: true
+    },
+    {
+        type: 'number',
+        key: 'number',
+        label: 'Picture border radius',
+        defaultValue: 15,
+        requireDecimal: false,
+        truncateMultipleSpaces: false,
+        labelPosition: 'left-left',
+        labelMargin: 0,
+        labelWidth: 50,
+        mask: false,
+        validateOn: 'change',
+        validate: {
+            min: 0,
+            max: 50,
+            custom: ({ input }) => emitEvent('profile-border-radius', input),
+            customMessage: 'Number must be a value between 0 and 50'
+        },
+        inputFormat: 'plain',
+        input: true
+    }
+];
+
+const layout = {
+    components: [
+        {
+            label: 'Tabs',
+            components: [
+                {
+                    label: 'Signature Details',
+                    key: 'tab1',
+                    components: details
+                },
+                {
+                    label: 'Stylize',
+                    key: 'tab2',
+                    components: stylize
+                }
+            ],
+            key: 'tabs',
+            type: 'tabs',
+            input: false,
+            tableView: false
+        }
+    ]
+}
+
 const translations = {
     language: 'en',
     i18n: {
         sp: {
+            'Address': 'Dirección',
             'Company Email': 'Correo electrónico',
             'Company Name': 'Nombre de la empresa',
+            'CSS Social Color': 'Color CSS iconos sociales',
+            'CSS Text Color': 'Color CSS del texto',
+            'CSS Theme Color': 'Color CSS del tema',
+            'Font': 'Tipo de letra',
+            'Font Size': 'Tamaño de letra',
             'Job Title': 'Cargo',
+            'Large': 'Grande',
             'Main Phone Number': 'Número de teléfono',
+            'Medium': 'Medio',
             'Mobile Phone Number': 'Número de móvil',
             'Name and surname': 'Nombre y apellidos',
+            'Number must be a value between 0 and 50': 'El número debe ser un valor entre 0 y 50',
+            'Picture border radius': 'Curbatura del radio de la imagen',
             'Profile Picture': 'Foto del perfil',
+            'Signature Details': 'Detalles de la Firma',
+            'Small': 'Pequeño',
+            'Stylize': 'Estilo',
             'Website URL': 'Sitio Web',
             'Company Email Address must be a valid email': 'El correo electrónico es inválido',
-            'Main Phone Number does not match the mask': 'El número de teléfono es inválido',
-            'Mobile Phone Number does not match the mask': 'El número de móvil es inválido',
             'Profile picture must be a valid url': 'La foto del perfil no es una URL válida',
+            'The CSS color is invalid': 'El código de color CSS es inválido',
             'Website URL must be a valid url': 'La URL del Sitio Web es inválida'
         }
     }
 };
 
-Formio.createForm(document.getElementById('formio'), { components }, translations)
-    .then(form => {
-        form.on('change', ({ changed }) => {
-            const { component: { key }, value } = changed;
+const formEl = document.getElementById('formio');
+let form = await Formio.createForm(formEl, layout, translations)
 
-            const el = document.getElementById(key);
-            if ('homepage' === key) {
-                el.href = getUrl(value)
-                el.innerText = value
-            }
-            else if ('email' === key) {
-                el.href = 'mailto:' + value
-                el.innerText = value
-            }
-            else if ('profile-picture' === key) {
-                el.src = value
-            }
-            else {
-                el.innerText = value
-            }
-        });
-
-        window.setLanguage = lang => {
-            form.language = lang;
-        }
-
-        components.forEach(component => {
-            const { key, placeholder } = component;
-
-            if ('profile-picture' != key) {
-                const el = document.getElementById(key);
-                el.innerText = placeholder
-            }
+const signatureForm = {
+    setLanguage,
+    then: (signatureFill) => {
+        form.on('change', data => {
+            fill(data)(signatureFill)
         })
-    });
+
+        initilize(signatureFill)
+        removeFormBorder()
+    }
+}
+
+export { signatureForm }
