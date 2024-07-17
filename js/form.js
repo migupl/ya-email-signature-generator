@@ -29,6 +29,8 @@ const emitFieldEvent = (id, value) => {
 }
 
 const fill = changed => {
+    if (!changed) return
+
     const { component: { key }, value } = changed;
     emitFieldEvent(key, value)
 }
@@ -384,6 +386,13 @@ const translations = {
 
 const formEl = document.getElementById('formio');
 const form = await Formio.createForm(formEl, layout, translations)
+
+if (userData) {
+    form.submission = {
+        data: userData
+    };
+}
+
 form.on('change', ({ data, changed }) => {
     save(data, localStorage)
     fill(changed)
