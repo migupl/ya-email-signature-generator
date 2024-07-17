@@ -9,11 +9,11 @@ const fakeData = await (async fakerLib => {
     }
 
     const lib = await import(fakerLib);
-    const data = await lib.fakeData;
+    const dummy = await lib.fakeData;
 
-    save(data)
+    save(dummy)
 
-    return data
+    return dummy
 })('./faker.js');
 
 const emitFieldEvent = (id, value) => {
