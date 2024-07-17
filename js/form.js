@@ -1,11 +1,14 @@
-const fakeData = await (async fakerLib => {
+const [fakeData, save] = await (async fakerLib => {
     const storageKey = 'yaEsgState';
     const save = (data, storage = sessionStorage) => storage.setItem(storageKey, JSON.stringify(data))
 
     const sessionSavedData = sessionStorage.getItem(storageKey);
 
     if (sessionSavedData) {
-        return JSON.parse(sessionSavedData)
+        return [
+            JSON.parse(sessionSavedData),
+            save
+        ]
     }
 
     const lib = await import(fakerLib);
@@ -13,7 +16,7 @@ const fakeData = await (async fakerLib => {
 
     save(dummy)
 
-    return dummy
+    return [dummy, save]
 })('./faker.js');
 
 const emitFieldEvent = (id, value) => {
@@ -24,7 +27,7 @@ const emitFieldEvent = (id, value) => {
     }))
 }
 
-const fill = ({ changed }) => {
+const fill = changed => {
     const { component: { key }, value } = changed;
     emitFieldEvent(key, value)
 }
@@ -84,22 +87,14 @@ const details = [
         key: 'telephone',
         label: 'Main Phone Number',
         placeholder: fakeData.phone,
-        input: true,
-        validateOn: 'change',
-        validate: {
-            custom: fill
-        }
+        input: true
     },
     {
         type: 'textfield',
         key: 'mobile-phone',
         label: 'Mobile Phone Number',
         placeholder: fakeData.phone,
-        input: true,
-        validateOn: 'change',
-        validate: {
-            custom: fill
-        }
+        input: true
     },
     {
         type: 'url',
@@ -388,7 +383,10 @@ const translations = {
 
 const formEl = document.getElementById('formio');
 const form = await Formio.createForm(formEl, layout, translations)
-form.on('change', fill)
+form.on('change', ({ data, changed }) => {
+    save(data, localStorage)
+    fill(changed)
+})
 
 initilize()
 removeFormBorder()
