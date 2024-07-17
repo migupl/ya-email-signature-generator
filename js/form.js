@@ -2,19 +2,18 @@ const [fakeData, save] = await (async fakerLib => {
     const storageKey = 'yaEsgState';
     const save = (data, storage = sessionStorage) => storage.setItem(storageKey, JSON.stringify(data))
 
-    const sessionSavedData = sessionStorage.getItem(storageKey);
+    const sessionDummy = sessionStorage.getItem(storageKey);
 
-    if (sessionSavedData) {
-        return [
-            JSON.parse(sessionSavedData),
-            save
-        ]
+    let dummy;
+    if (sessionDummy) {
+        dummy = JSON.parse(sessionDummy)
     }
+    else {
+        const lib = await import(fakerLib);
+        dummy = await lib.fakeData
 
-    const lib = await import(fakerLib);
-    const dummy = await lib.fakeData;
-
-    save(dummy)
+        save(dummy)
+    }
 
     return [dummy, save]
 })('./faker.js');
