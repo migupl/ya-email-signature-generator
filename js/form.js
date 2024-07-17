@@ -1,5 +1,7 @@
 const fakeData = await (async fakerLib => {
     const storageKey = 'yaEsgState';
+    const save = (data, storage = sessionStorage) => storage.setItem(storageKey, JSON.stringify(data))
+
     const sessionSavedData = sessionStorage.getItem(storageKey);
 
     if (sessionSavedData) {
@@ -9,7 +11,8 @@ const fakeData = await (async fakerLib => {
     const lib = await import(fakerLib);
     const data = await lib.fakeData;
 
-    sessionStorage.setItem(storageKey, JSON.stringify(data))
+    save(data)
+
     return data
 })('./faker.js');
 
