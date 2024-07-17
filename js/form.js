@@ -1,7 +1,8 @@
-const [fakeData, save] = await (async fakerLib => {
+const [userData, fakeData, save] = await (async fakerLib => {
     const storageKey = 'yaEsgState';
     const save = (data, storage = sessionStorage) => storage.setItem(storageKey, JSON.stringify(data))
 
+    const localData = localStorage.getItem(storageKey);
     const sessionDummy = sessionStorage.getItem(storageKey);
 
     let dummy;
@@ -15,7 +16,8 @@ const [fakeData, save] = await (async fakerLib => {
         save(dummy)
     }
 
-    return [dummy, save]
+    let data = localData ? JSON.parse(localData) : undefined;
+    return [data, dummy, save]
 })('./faker.js');
 
 const emitFieldEvent = (id, value) => {
