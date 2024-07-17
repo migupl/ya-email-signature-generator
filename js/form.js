@@ -26,10 +26,10 @@ const fill = ({ changed }) => {
     emitFieldEvent(key, value)
 }
 
-const initilize = updateSignature => {
+const initilize = () => {
     details.forEach(component => {
         const { key, placeholder } = component;
-        updateSignature({ id: key, value: placeholder })
+        emitFieldEvent(key, placeholder)
     })
 
     stylize.forEach(component => {
@@ -42,8 +42,6 @@ const removeFormBorder = (removeBorderClass = 'border-0') => {
     const el = formEl.querySelector('.card');
     el.classList.add(removeBorderClass)
 }
-
-const setLanguage = lang => form.language = lang;
 
 const details = [
     {
@@ -386,16 +384,14 @@ const translations = {
 };
 
 const formEl = document.getElementById('formio');
-let form = await Formio.createForm(formEl, layout, translations)
+const form = await Formio.createForm(formEl, layout, translations)
+form.on('change', fill)
+
+initilize()
+removeFormBorder()
 
 const signatureForm = {
-    setLanguage,
-    then: (signatureFill) => {
-        form.on('change', fill)
-
-        initilize(signatureFill)
-        removeFormBorder()
-    }
+    setLanguage: lang => form.language = lang
 }
 
 export { signatureForm }

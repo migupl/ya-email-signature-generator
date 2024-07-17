@@ -1,5 +1,3 @@
-import { signatureForm } from './form.js'
-
 const getUrl = str => {
     const clean = str.trim();
     if (clean.startsWith('http')) return clean
@@ -65,14 +63,15 @@ document.addEventListener('form:change-style', ev => {
         .forEach(action(value))
 });
 
-const onLoadForm = (() => {
-    window.setLanguage = signatureForm.setLanguage
-    signatureForm
-        .then(fillSignature);
+const onLoadForm = (async file => {
+    const module = await import(file);
+    const form = await module.signatureForm;
+
+    window.setLanguage = form.setLanguage
 
     const card = document.getElementById('signature-card');
     card.style.display = 'block'
 
     const spinner = document.getElementById('spinner');
     spinner.style.display = 'none'
-})();
+})('./form.js');
