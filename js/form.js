@@ -13,15 +13,23 @@ const fakeData = await (async fakerLib => {
     return data
 })('./faker.js');
 
-const fill = ({ changed }) => updateSignature => {
+const emitFieldEvent = (id, value) => {
+    formEl.dispatchEvent(new CustomEvent('form:change-field', {
+        bubbles: true,
+        composed: true,
+        detail: { id, value }
+    }))
+}
+
+const fill = ({ changed }) => {
     const { component: { key }, value } = changed;
-    updateSignature(key, value)
+    emitFieldEvent(key, value)
 }
 
 const initilize = updateSignature => {
     details.forEach(component => {
         const { key, placeholder } = component;
-        updateSignature(key, placeholder)
+        updateSignature({ id: key, value: placeholder })
     })
 
     stylize.forEach(component => {
@@ -383,9 +391,7 @@ let form = await Formio.createForm(formEl, layout, translations)
 const signatureForm = {
     setLanguage,
     then: (signatureFill) => {
-        form.on('change', data => {
-            fill(data)(signatureFill)
-        })
+        form.on('change', fill)
 
         initilize(signatureFill)
         removeFormBorder()

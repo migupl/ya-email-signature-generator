@@ -6,7 +6,7 @@ const getUrl = str => {
     return `https://${clean}`
 };
 
-const fillSignature = (id, value) => {
+const fillSignature = ({ id, value }) => {
     const el = document.getElementById(id);
     if (!el) return
 
@@ -51,11 +51,16 @@ const layoutChangeTypes = {
     }
 };
 
+document.addEventListener('form:change-field', ev => {
+    ev.stopPropagation()
+    fillSignature(ev.detail)
+});
+
 document.addEventListener('form:change-style', ev => {
     const { type, value } = ev.detail;
     const { attribute, action } = layoutChangeTypes[type];
 
-    ev.stopPropagation();
+    ev.stopPropagation()
     document.querySelectorAll(`[${attribute}]`)
         .forEach(action(value))
 });
