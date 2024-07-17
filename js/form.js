@@ -126,11 +126,11 @@ const details = [
 const emitEventOnValidColor = eventType => ({ input }) => {
     const s = new Option().style;
     s.color = /\d/.test(input) ? `#${input}` : input;
-    return s.color ? emitEvent(eventType, s.color) : false
+    return s.color ? emitStyleEvent(eventType, s.color) : false
 }
 
-const emitEvent = (type, value) => {
-    formEl.dispatchEvent(new CustomEvent('form:change', {
+const emitStyleEvent = (type, value) => {
+    formEl.dispatchEvent(new CustomEvent('form:change-style', {
         bubbles: true,
         composed: true,
         detail: { type, value }
@@ -203,7 +203,7 @@ const stylize = [
         defaultValue: 'Arial, sans-serif',
         validate: {
             onlyAvailableItems: true,
-            custom: ({ input }) => emitEvent('font', input)
+            custom: ({ input }) => emitStyleEvent('font', input)
         },
         widget: 'html5',
         input: true
@@ -238,7 +238,7 @@ const stylize = [
                     }
                 ],
                 validate: {
-                    custom: ({ input }) => emitEvent('font-size', input)
+                    custom: ({ input }) => emitStyleEvent('font-size', input)
                 },
                 input: true
             }
@@ -305,7 +305,7 @@ const stylize = [
         validate: {
             min: 0,
             max: 50,
-            custom: ({ input }) => emitEvent('profile-border-radius', input),
+            custom: ({ input }) => emitStyleEvent('profile-border-radius', input),
             customMessage: 'Number must be a value between 0 and 50'
         },
         inputFormat: 'plain',

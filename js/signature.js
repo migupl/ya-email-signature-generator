@@ -51,7 +51,7 @@ const layoutChangeTypes = {
     }
 };
 
-document.addEventListener('form:change', ev => {
+document.addEventListener('form:change-style', ev => {
     const { type, value } = ev.detail;
     const { attribute, action } = layoutChangeTypes[type];
 
