@@ -399,6 +399,8 @@ form.on('change', ({ data, changed }) => {
     fill(changed)
 })
 
+form.on('languageChanged', () => removeFormBorder())
+
 if (userData) {
     form.submission = {
         data: userData
@@ -406,10 +408,7 @@ if (userData) {
 }
 
 const signatureForm = {
-    setLanguage: lang => {
-        form.language = lang
-        removeFormBorder()
-    }
+    setLanguage: lang => form.language = lang
 }
 
 export { signatureForm }
