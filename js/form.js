@@ -36,21 +36,11 @@ const fill = changed => {
 }
 
 const initilize = () => {
-    details.forEach(component => {
-        const { key, placeholder } = component;
-        emitFieldEvent(key, placeholder)
-    })
-
-    stylize.forEach(component => {
-        const applyStyle = component.validate?.custom || component.components[0].validate.custom;
-        applyStyle({ input: component.defaultValue })
-    })
-
-    if (userData) {
-        for (const [key, value] of Object.entries(userData)) {
-            if (value) emitFieldEvent(key, value)
-        }
-    }
+    form.everyComponent((component) => {
+        const { component: { key, placeholder } } = component;
+        const value = form.getComponent(key).getValue() || placeholder;
+        if (value && typeof value === 'string') emitFieldEvent(key, value)
+    });
 }
 
 const removeFormBorder = (removeBorderClass = 'border-0') => {
@@ -393,19 +383,21 @@ const translations = {
 const formEl = document.getElementById('formio');
 const form = await Formio.createForm(formEl, layout, translations)
 
-if (userData) {
-    form.submission = {
-        data: userData
-    };
-}
+form.ready.then(() => {
+    initilize()
+    removeFormBorder()
+})
 
 form.on('change', ({ data, changed }) => {
     save(data, localStorage)
     fill(changed)
 })
 
-initilize()
-removeFormBorder()
+if (userData) {
+    form.submission = {
+        data: userData
+    };
+}
 
 const signatureForm = {
     setLanguage: lang => {
