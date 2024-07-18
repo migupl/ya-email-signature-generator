@@ -402,7 +402,10 @@ initilize()
 removeFormBorder()
 
 const signatureForm = {
-    setLanguage: lang => form.language = lang
+    setLanguage: lang => {
+        form.language = lang
+        removeFormBorder()
+    }
 }
 
 export { signatureForm }
