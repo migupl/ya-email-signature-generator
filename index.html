@@ -35,12 +35,15 @@
         }
     </style>
 </head>
+
 <body>
     <div class="d-flex flex-row justify-content-start h-100">
         <div class="w-25 bg-light">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary" onclick="setLanguage('sp')">Español</button>
-                <button type="button" class="btn btn-primary" onclick="setLanguage('en')">English</button>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <div class="btn-group btn-group-sm my-2">
+                    <button type="button" class="btn btn-primary" onclick="setLanguage('sp')">Español</button>
+                    <button type="button" class="btn btn-primary" onclick="setLanguage('en')">English</button>
+                </div>
             </div>
             <div id="formio"></div>
         </div>
