@@ -45,6 +45,12 @@ const initilize = () => {
         const applyStyle = component.validate?.custom || component.components[0].validate.custom;
         applyStyle({ input: component.defaultValue })
     })
+
+    if (userData) {
+        for (const [key, value] of Object.entries(userData)) {
+            if (value) emitFieldEvent(key, value)
+        }
+    }
 }
 
 const removeFormBorder = (removeBorderClass = 'border-0') => {
