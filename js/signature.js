@@ -52,7 +52,7 @@ const layoutChangeTypes = {
 document.addEventListener('form:change-field', ev => {
     ev.stopPropagation()
     fillSignature(ev.detail)
-});
+})
 
 document.addEventListener('form:change-style', ev => {
     const { type, value } = ev.detail;
@@ -61,7 +61,24 @@ document.addEventListener('form:change-style', ev => {
     ev.stopPropagation()
     document.querySelectorAll(`[${attribute}]`)
         .forEach(action(value))
-});
+})
+
+document.addEventListener('form:clean-card', ev => {
+    const { ids } = ev.detail;
+
+    ev.stopPropagation()
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return
+
+        if ('profile-picture' === id) {
+            el.src = '/assets/empty-profile.png'
+        }
+        else {
+            el.parentNode.style.display = 'none'
+        }
+    })
+})
 
 const onLoadForm = (async file => {
     const module = await import(file);

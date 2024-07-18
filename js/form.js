@@ -142,6 +142,19 @@ const formComponents = (fakeData => {
         return true
     }
 
+    const emitEventOnCleanCard = ({ data }) => {
+        const empties = [];
+        for (const [key, value] of Object.entries(data)) {
+            if (!value) empties.push(key)
+        }
+
+        formEl.dispatchEvent(new CustomEvent('form:clean-card', {
+            bubbles: true,
+            composed: true,
+            detail: { ids: empties }
+        }))
+    }
+
     const social = ['Facebook', 'Instagram', 'LinkedIn', 'Mastodon', 'TikTok', 'Twitter X', 'Youtube']
         .reduce((arr, socialName) => {
             const key = socialName.toLowerCase().replace(/\s/g, '-');
@@ -349,7 +362,7 @@ const formComponents = (fakeData => {
                 label: 'Clean the Card',
                 tooltip: 'Remove all empty data from the signature card to be copied',
                 action: 'custom',
-                custom: ({ data }) => console.log('button:', data),
+                custom: emitEventOnCleanCard,
                 showValidations: false,
                 disableOnInvalid: true,
                 input: true
