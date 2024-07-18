@@ -342,6 +342,17 @@ const formComponents = (fakeData => {
                 type: 'tabs',
                 input: false,
                 tableView: false
+            },
+            {
+                key: 'submit',
+                type: 'button',
+                label: 'Clean the Card',
+                tooltip: 'Remove all empty data from the signature card to be copied',
+                action: 'custom',
+                custom: ({ data }) => console.log('button:', data),
+                showValidations: false,
+                disableOnInvalid: true,
+                input: true
             }
         ]
     }
@@ -351,6 +362,7 @@ const formComponents = (fakeData => {
         i18n: {
             sp: {
                 'Address': 'Dirección',
+                'Clean the Card': 'Limpiar la tarjeta',
                 'Company Email': 'Correo electrónico',
                 'Company Name': 'Nombre de la empresa',
                 'CSS Social Color': 'Color CSS iconos sociales',
@@ -368,6 +380,8 @@ const formComponents = (fakeData => {
                 'Number must be a value between 0 and 50': 'El número debe ser un valor entre 0 y 50',
                 'Picture border radius': 'Curbatura del radio de la imagen',
                 'Profile Picture': 'Foto del perfil',
+                'Remove all empty data from the signature card to be copied':
+                    'Eliminar todos los datos vacíos de la tarjeta de firma para su copia',
                 'Signature Details': 'Detalles de la Firma',
                 'Small': 'Pequeño',
                 'Social Nets': 'Redes sociales',
