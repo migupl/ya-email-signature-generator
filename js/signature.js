@@ -108,7 +108,10 @@ const onLoadForm = (async file => {
     const inputs = document.querySelectorAll('input[name="btn-language"]');
     inputs.forEach(input => {
         const language = input.lang;
-        input.addEventListener('input', () => setLanguage(language))
+        input.oninput = () => {
+            setLanguage(language)
+            messageShowBy(language)
+        }
     })
 
     const close = message.querySelector('button');
