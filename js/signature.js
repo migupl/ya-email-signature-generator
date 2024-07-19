@@ -66,7 +66,7 @@ document.addEventListener('form:change-style', ev => {
 })
 
 document.addEventListener('form:clean-card', ev => {
-    const { ids } = ev.detail;
+    const { ids, lang } = ev.detail;
 
     ev.stopPropagation()
     ids.forEach(id => {
@@ -80,6 +80,11 @@ document.addEventListener('form:clean-card', ev => {
             el.parentNode.style.display = 'none'
         }
     })
+
+    const messages = message.querySelectorAll('[lang]')
+    messages.forEach(message =>
+        message.style.display = lang === message.lang ? '' : 'none'
+    )
 
     message.style.display = ''
 })

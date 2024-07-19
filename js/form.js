@@ -146,7 +146,7 @@ const formComponents = (fakeData => {
         formEl.dispatchEvent(new CustomEvent('form:clean-card', {
             bubbles: true,
             composed: true,
-            detail: { ids: empties }
+            detail: { ids: empties, lang: form.language }
         }))
     }
 
