@@ -360,6 +360,10 @@ const formComponents = (fakeData => {
                 custom: emitEventOnCleanCard,
                 showValidations: false,
                 disableOnInvalid: true,
+                theme: 'info',
+                size: 'sm',
+                block: true,
+                customClass: 'clean-button',
                 input: true
             }
         ]
