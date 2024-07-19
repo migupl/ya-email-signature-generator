@@ -80,7 +80,11 @@ document.addEventListener('form:clean-card', ev => {
             el.parentNode.style.display = 'none'
         }
     })
+
+    message.style.display = ''
 })
+
+const message = document.getElementById('clean-message');
 
 const onLoadForm = (async file => {
     const module = await import(file);
@@ -93,4 +97,7 @@ const onLoadForm = (async file => {
 
     const spinner = document.getElementById('spinner');
     spinner.style.display = 'none'
+
+    const close = message.querySelector('button');
+    close.onclick = () => message.style.display = 'none'
 })('./form.js');
