@@ -21,7 +21,7 @@ const fillSignature = ({ id, value }) => {
     else if ('profile-picture' === id) {
         el.src = value
     }
-    else if ('telephone' === id || 'mobile-phone' ===id) {
+    else if ('telephone' === id || 'mobile-phone' === id) {
         el.href = 'tel:' + value.replace(/\s/g, '')
         el.innerText = value
     }
@@ -41,7 +41,7 @@ const layoutChangeTypes = {
     'font-size': { attribute: 'font', action: change('fontSize') },
     'profile-border-radius': {
         attribute: 'profile-radius',
-        action: value => el =>  change('borderRadius')(`${value}%`)(el)
+        action: value => el => change('borderRadius')(`${value}%`)(el)
     },
     'social-color': { attribute: 'social-color', action: change('backgroundColor') },
     'text-color': { attribute: 'font', action: change('color') },
