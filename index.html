@@ -40,9 +40,12 @@
     <div class="d-flex flex-row justify-content-start h-100">
         <div class="w-25 bg-light">
             <div class="d-flex flex-row justify-content-center align-items-center">
-                <div class="btn-group btn-group-sm my-2">
-                    <button type="button" class="btn btn-primary" onclick="setLanguage('sp')">Español</button>
-                    <button type="button" class="btn btn-primary" onclick="setLanguage('en')">English</button>
+                <div class="btn-group btn-group-sm my-2" role="group">
+                    <input type="radio" class="btn-check" name="btn-language" id="btn-language-en" autocomplete="off" oninput="setLanguage('en')" checked>
+                    <label class="btn btn-outline-primary" for="btn-language-en">English</label>
+
+                    <input type="radio" class="btn-check" name="btn-language" id="btn-language-sp" autocomplete="off" oninput="setLanguage('sp')">
+                    <label class="btn btn-outline-primary" for="btn-language-sp">Español</label>
                 </div>
             </div>
             <div id="formio"></div>
