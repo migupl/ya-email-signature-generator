@@ -103,6 +103,12 @@ const onLoadForm = (async file => {
     const spinner = document.getElementById('spinner');
     spinner.style.display = 'none'
 
+    const inputs = document.querySelectorAll('input[name="btn-language"]');
+    inputs.forEach(input => {
+        const language = input.lang;
+        input.addEventListener('input', () => setLanguage(language))
+    })
+
     const close = message.querySelector('button');
     close.onclick = () => message.style.display = 'none'
 })('./form.js');
