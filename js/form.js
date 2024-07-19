@@ -43,11 +43,6 @@ const initilize = () => {
     });
 }
 
-const removeFormBorder = (removeBorderClass = 'border-0') => {
-    const el = formEl.querySelector('.card');
-    el.classList.add(removeBorderClass)
-}
-
 const formComponents = (fakeData => {
     const details = [
         {
@@ -418,15 +413,12 @@ const form = await Formio.createForm(formEl, formComponents.layout, formComponen
 
 form.ready.then(() => {
     initilize()
-    removeFormBorder()
 })
 
 form.on('change', ({ data, changed }) => {
     save(data, localStorage)
     fill(changed)
 })
-
-form.on('languageChanged', () => removeFormBorder())
 
 if (userData) {
     form.submission = {
