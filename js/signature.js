@@ -81,15 +81,17 @@ document.addEventListener('form:clean-card', ev => {
         }
     })
 
-    const messages = message.querySelectorAll('[lang]')
-    messages.forEach(message =>
-        message.style.display = lang === message.lang ? '' : 'none'
-    )
-
+    messageShowBy(lang)
     message.style.display = ''
 })
 
 const message = document.getElementById('clean-message');
+const messageShowBy = language => {
+    const messages = message.querySelectorAll('[lang]')
+    messages.forEach(message =>
+        message.style.display = language === message.lang ? '' : 'none'
+    )
+}
 
 const onLoadForm = (async file => {
     const module = await import(file);
