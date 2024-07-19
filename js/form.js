@@ -372,7 +372,7 @@ const formComponents = (fakeData => {
     const translations = {
         language: 'en',
         i18n: {
-            sp: {
+            es: {
                 'Address': 'Dirección',
                 'Clean the Card': 'Limpiar la tarjeta',
                 'Company Email': 'Correo electrónico',
