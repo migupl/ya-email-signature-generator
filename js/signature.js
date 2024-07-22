@@ -76,7 +76,7 @@ const onForm = (() => {
             }
         })
 
-        messageShowBy(lang)
+        changeLanguageTo(lang)
         message.style.display = ''
     };
     const fill = event => {
@@ -113,7 +113,7 @@ const onResizePictureProfile = (() => {
 })();
 
 const message = document.getElementById('clean-message');
-const messageShowBy = language => {
+const changeLanguageTo = language => {
     const messages = message.querySelectorAll('[lang]')
     messages.forEach(message =>
         message.style.display = language === message.lang ? '' : 'none'
@@ -150,7 +150,7 @@ const onLoadForm = (async file => {
         const language = input.lang;
         input.oninput = () => {
             setLanguage(language)
-            messageShowBy(language)
+            changeLanguageTo(language)
         }
     })
 
