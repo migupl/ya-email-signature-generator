@@ -94,10 +94,15 @@ const messageShowBy = language => {
 }
 
 const onLoadForm = (async file => {
-    const module = await import(file);
-    const form = await module.signatureForm;
+    try {
+        const module = await import(file);
+        const form = await module.signatureForm;
 
-    window.setLanguage = form.setLanguage
+        window.setLanguage = form.setLanguage
+
+    } catch (error) {
+        console.erro(error)
+    }
 
     const card = document.getElementById('signature-card');
     card.style.display = 'block'

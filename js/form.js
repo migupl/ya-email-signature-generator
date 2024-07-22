@@ -10,8 +10,25 @@ const [userData, dummyData, save] = await (async fakerLib => {
         dummy = JSON.parse(sessionDummy)
     }
     else {
-        const lib = await import(fakerLib);
-        dummy = await lib.fakeData
+        try {
+            const lib = await import(fakerLib);
+            dummy = await lib.fakeData
+
+        } catch (error) {
+            console.error(error)
+            console.log('Using a harcoded dummy data')
+
+            dummy = {
+                address: "Solar Patricia 22, 06812, Avilés",
+                companyName: "Salgado y Fonseca",
+                email: "Dolores.AriasGuzman@huge-freckle.info",
+                fullname: "Dolores Arias Guzmán",
+                jobTitle: "Ejecutivo de Creativo Distrito",
+                phone: "996 102 379",
+                profilePicture: "https://loremflickr.com/250/250/face?lock=3981216531349504",
+                website: "https://huge-freckle.info/"
+            }
+        }
 
         save(dummy)
     }
