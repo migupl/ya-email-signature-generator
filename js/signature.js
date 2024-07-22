@@ -1,3 +1,21 @@
+const message = (() => {
+    const message = document.getElementById('clean-message');
+    const changeLanguageTo = language => {
+        const messages = message.querySelectorAll('[lang]')
+        messages.forEach(message =>
+            message.style.display = language === message.lang ? '' : 'none'
+        )
+    }
+    const hide = () => message.style.display = '';
+
+    const close = message.querySelector('button');
+    close.onclick = () => message.style.display = 'none'
+
+    return {
+        changeLanguageTo, hide
+    }
+})();
+
 const onForm = (() => {
     const getUrl = str => {
         const clean = str.trim();
@@ -76,8 +94,8 @@ const onForm = (() => {
             }
         })
 
-        changeLanguageTo(lang)
-        message.style.display = ''
+        message.changeLanguageTo(lang)
+        message.hide()
     };
     const fill = event => {
         event.stopPropagation()
@@ -112,15 +130,6 @@ const onResizePictureProfile = (() => {
     return { bigger, smaller };
 })();
 
-const message = document.getElementById('clean-message');
-const changeLanguageTo = language => {
-    const messages = message.querySelectorAll('[lang]')
-    messages.forEach(message =>
-        message.style.display = language === message.lang ? '' : 'none'
-    )
-}
-
-
 document.addEventListener('form:clean-card', onForm.clean)
 document.addEventListener('form:change-field', onForm.fill)
 document.addEventListener('form:change-style', onForm.changeStyle)
@@ -150,10 +159,7 @@ const onLoadForm = (async file => {
         const language = input.lang;
         input.oninput = () => {
             setLanguage(language)
-            changeLanguageTo(language)
+            message.changeLanguageTo(language)
         }
     })
-
-    const close = message.querySelector('button');
-    close.onclick = () => message.style.display = 'none'
 })('./form.js');
