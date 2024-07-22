@@ -330,6 +330,55 @@ const formComponents = (fakeData => {
             },
             inputFormat: 'plain',
             input: true
+        },
+        {
+            type: 'fieldset',
+            key: 'resizing',
+            legend: 'Resize Picture Profile',
+            tableview: false,
+            components: [
+                {
+                    type: 'columns',
+                    key: 'resizing',
+                    label: 'columns',
+                    columns: [
+                        {
+                            components: [
+                                {
+                                    type: 'button',
+                                    key: 'smaller',
+                                    label: 'Smaller Image',
+                                    action: 'custom',
+                                    custom: () => emitEvent('form:profile-picture:smaller'),
+                                    showValidations: false,
+                                    theme: 'secondary',
+                                    size: 'sm'
+                                }
+                            ],
+                            width: 4,
+                            currentWidth: 4
+                        },
+                        {
+                            components: [
+                                {
+                                    type: 'button',
+                                    key: 'bigger',
+                                    label: 'or bigger',
+                                    action: 'custom',
+                                    custom: () => emitEvent('form:profile-picture:bigger'),
+                                    showValidations: false,
+                                    theme: 'secondary',
+                                    size: 'sm'
+                                },
+                            ],
+                            width: 4,
+                            currentWidth: 4
+                        }
+                    ],
+                    input: false
+                },
+            ],
+            input: false
         }
     ];
 
@@ -398,12 +447,15 @@ const formComponents = (fakeData => {
                 'Name and surname': 'Nombre y apellidos',
                 'Must be a valir url': 'Debe ser una url válida',
                 'Number must be a value between 0 and 50': 'El número debe ser un valor entre 0 y 50',
+                'or bigger': 'o más grande',
                 'Picture border radius': 'Curbatura del radio de la imagen',
                 'Profile Picture': 'Foto del perfil',
                 'Remove all empty data from the signature card to be copied':
                     'Eliminar todos los datos vacíos de la tarjeta de firma para su copia',
+                'Resize Picture Profile': 'Redimensionar la imagen de perfil',
                 'Signature Details': 'Detalles de la Firma',
                 'Small': 'Pequeño',
+                'Smaller Image': 'Más pequeña',
                 'Social Nets': 'Redes sociales',
                 'Stylize': 'Estilo',
                 'Website URL': 'Sitio Web',

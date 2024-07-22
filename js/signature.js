@@ -85,6 +85,31 @@ document.addEventListener('form:clean-card', ev => {
     message.style.display = ''
 })
 
+const onResizePictureProfile = (() => {
+    const resize = (() => {
+        const percent = 0.05;
+
+        return {
+            smaller: 1 - percent,
+            bigger: 1 + percent
+        }
+    })();
+
+    const profilePicture = document.getElementById('profile-picture');
+    const bigger = event => {
+        event.stopPropagation()
+        profilePicture.height *= resize.bigger
+        profilePicture.width *= resize.bigger
+    };
+    const smaller = event => {
+        event.stopPropagation()
+        profilePicture.height *= resize.smaller
+        profilePicture.width *= resize.smaller
+    };
+
+    return { bigger, smaller };
+})();
+
 const message = document.getElementById('clean-message');
 const messageShowBy = language => {
     const messages = message.querySelectorAll('[lang]')
@@ -92,6 +117,9 @@ const messageShowBy = language => {
         message.style.display = language === message.lang ? '' : 'none'
     )
 }
+
+document.addEventListener('form:profile-picture:bigger', onResizePictureProfile.bigger)
+document.addEventListener('form:profile-picture:smaller', onResizePictureProfile.smaller)
 
 const onLoadForm = (async file => {
     try {
