@@ -271,7 +271,7 @@ const formComponents = (fakeData => {
             label: 'CSS Text Color',
             labelPosition: 'left-left',
             labelMargin: 0,
-            labelWidth: 30,
+            labelWidth: 40,
             defaultValue: 'black',
             validateOn: 'change',
             validate: {
@@ -287,7 +287,7 @@ const formComponents = (fakeData => {
             label: 'CSS Theme Color',
             labelPosition: 'left-left',
             labelMargin: 0,
-            labelWidth: 30,
+            labelWidth: 40,
             defaultValue: 'SlateGrey',
             validateOn: 'change',
             validate: {
@@ -303,7 +303,7 @@ const formComponents = (fakeData => {
             label: 'CSS Social Color',
             labelPosition: 'left-left',
             labelMargin: 0,
-            labelWidth: 30,
+            labelWidth: 40,
             defaultValue: 'DarkBlue',
             validateOn: 'change',
             validate: {
