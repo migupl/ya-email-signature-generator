@@ -37,13 +37,13 @@ const [userData, dummyData, save] = await (async fakerLib => {
     return [data, dummy, save]
 })('./faker.js');
 
-const emitFieldEvent = (id, value) => {
-    formEl.dispatchEvent(new CustomEvent('form:change-field', {
-        bubbles: true,
-        composed: true,
-        detail: { id, value }
-    }))
-}
+const emitEvent = (type, detail = {}) => formEl.dispatchEvent(new CustomEvent(type, {
+    bubbles: true,
+    composed: true,
+    detail: detail
+}))
+
+const emitFieldEvent = (id, value) => emitEvent('form:change-field', { id, value })
 
 const fill = changed => {
     if (!changed) return
@@ -145,26 +145,14 @@ const formComponents = (fakeData => {
         return s.color ? emitStyleEvent(eventType, s.color) : false
     }
 
-    const emitStyleEvent = (type, value) => {
-        formEl.dispatchEvent(new CustomEvent('form:change-style', {
-            bubbles: true,
-            composed: true,
-            detail: { type, value }
-        }))
-        return true
-    }
-
+    const emitStyleEvent = (type, value) => emitEvent('form:change-style', { type, value })
     const emitEventOnCleanCard = ({ data }) => {
         const empties = [];
         for (const [key, value] of Object.entries(data)) {
             if (!value) empties.push(key)
         }
 
-        formEl.dispatchEvent(new CustomEvent('form:clean-card', {
-            bubbles: true,
-            composed: true,
-            detail: { ids: empties, lang: form.language }
-        }))
+        emitEvent('form:clean-card', { ids: empties, lang: form.language })
     }
 
     const social = ['Facebook', 'Instagram', 'LinkedIn', 'Mastodon', 'TikTok', 'Twitter X', 'Youtube']
