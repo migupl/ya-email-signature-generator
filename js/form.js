@@ -278,6 +278,7 @@ const formComponents = (fakeData => {
                 custom: emitEventOnValidColor('text-color'),
                 customMessage: 'The CSS color is invalid'
             },
+            tooltip: 'A color name or a hex value',
             input: true
         },
         {
@@ -293,6 +294,7 @@ const formComponents = (fakeData => {
                 custom: emitEventOnValidColor('theme-color'),
                 customMessage: 'The CSS color is invalid'
             },
+            tooltip: 'A color name or a hex value',
             input: true
         },
         {
@@ -308,6 +310,7 @@ const formComponents = (fakeData => {
                 custom: emitEventOnValidColor('social-color'),
                 customMessage: 'The CSS color is invalid'
             },
+            tooltip: 'A color name or a hex value',
             input: true
         },
         {
@@ -329,6 +332,7 @@ const formComponents = (fakeData => {
                 customMessage: 'Number must be a value between 0 and 50'
             },
             inputFormat: 'plain',
+            tooltip: 'A value between 0 (square border) or 50 (rounded)',
             input: true
         },
         {
@@ -430,6 +434,8 @@ const formComponents = (fakeData => {
         language: 'en',
         i18n: {
             es: {
+                'A color name or a hex value': 'Un nombre de color o valor hexadecimal',
+                'A value between 0 (square border) or 50 (rounded)': 'Un valor entre 0 (borde cuadrado) ó 50 (redondeado)',
                 'Address': 'Dirección',
                 'Clean the Card': 'Limpiar la tarjeta',
                 'Company Email': 'Correo electrónico',
