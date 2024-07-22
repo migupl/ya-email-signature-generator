@@ -1,8 +1,5 @@
 # Yet Another Email Signature Generator
 
-> **Warning**
-> Work in Progress
-
 You can use this project to generate a signature card to copy and paste as an email signature.
 
 Normally the different mail providers allow you to modify the copied data in aspects such as font type, position, etc.
