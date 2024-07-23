@@ -148,6 +148,15 @@ const onLoadForm = (async file => {
         console.erro(error)
     }
 
+    window.copyCardToClipboard = async () => {
+        const card = document.getElementById('signature-card-content');
+        await navigator.clipboard.write([
+            new ClipboardItem({
+                'text/html': card.innerHTML
+            })
+        ])
+    }
+
     const card = document.getElementById('signature-card');
     card.style.display = 'block'
 
