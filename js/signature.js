@@ -16,6 +16,32 @@ const message = (() => {
     }
 })();
 
+const onCopyCard = (() => {
+    const copy = document.getElementById('copy-card');
+    const copied = document.getElementById('card-copied');
+
+    const toClipboard = async () => {
+        copy.style.display = 'none'
+        copied.style.display = ''
+
+        const card = document.getElementById('signature-card-content');
+        await navigator.clipboard.write([
+            new ClipboardItem({
+                'text/html': card.innerHTML
+            })
+        ])
+
+        setTimeout(() => {
+            copy.style.display = ''
+            copied.style.display = 'none'
+        }, 2000)
+    }
+
+    return {
+        toClipboard
+    }
+})();
+
 const onForm = (() => {
     const getUrl = str => {
         const clean = str.trim();
@@ -148,14 +174,7 @@ const onLoadForm = (async file => {
         console.erro(error)
     }
 
-    window.copyCardToClipboard = async () => {
-        const card = document.getElementById('signature-card-content');
-        await navigator.clipboard.write([
-            new ClipboardItem({
-                'text/html': card.innerHTML
-            })
-        ])
-    }
+    window.copyCardToClipboard = onCopyCard.toClipboard
 
     const card = document.getElementById('signature-card');
     card.style.display = 'block'
