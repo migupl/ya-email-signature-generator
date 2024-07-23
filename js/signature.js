@@ -113,7 +113,7 @@ const onForm = (() => {
             if (!el) return
 
             if ('profile-picture' === id) {
-                el.src = '/assets/empty-profile.png'
+                el.src = './assets/empty-profile.png'
             }
             else {
                 el.parentNode.style.display = 'none'
