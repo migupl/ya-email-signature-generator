@@ -4,6 +4,12 @@ You can use this project to generate a signature card to copy and paste as an em
 
 Normally the different mail providers allow you to modify the copied data in aspects such as font type, position, etc.
 
+The user data is stored in the localStorage space for later use and the dummy data is downloaded once per session and stored in sessionStorage.
+
+Each time the page is refreshed, the email signature is populated using both data. The _Clean the Card_ button removes all dummy data from the card and that's it. The Email Signature can now be copied.
+
+You can always add new data at any time and the card will be refreshed with these automatically.
+
 ## Helpers
 
 [The 17 DOs and DON’Ts of email signatures](https://exclaimer.com/email-signature-handbook/the-17-email-signature-dos-and-donts/)
