@@ -1,6 +1,11 @@
 const [userData, dummyData, save] = await (async fakerLib => {
+    const dimensions = { width: 150, height: 150 };
+
     const storageKey = 'yaEsgState';
-    const save = (data, storage = sessionStorage) => storage.setItem(storageKey, JSON.stringify(data))
+    const save = (data, storage = sessionStorage) => {
+        if (!data.dimensions) data = { ...data, dimensions }
+        storage.setItem(storageKey, JSON.stringify(data))
+    }
 
     const localData = localStorage.getItem(storageKey);
     const sessionDummy = sessionStorage.getItem(storageKey);
@@ -31,7 +36,6 @@ const [userData, dummyData, save] = await (async fakerLib => {
             }
         }
 
-        const dimensions = { width: 150, height: 150 };
         dummy = { ...fake, dimensions };
         save(dummy)
     }
