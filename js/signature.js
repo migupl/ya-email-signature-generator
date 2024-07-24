@@ -25,6 +25,11 @@ const onCopyCard = (() => {
         copied.style.display = ''
 
         const card = document.getElementById('signature-card-content');
+
+        // Trick, override the relative path with the resolution of src thas is always an absolute path
+        const images = card.querySelectorAll('img');
+        images.forEach(img => img.src = img.src)
+
         await navigator.clipboard.write([
             new ClipboardItem({
                 'text/html': card.innerHTML
