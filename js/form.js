@@ -61,6 +61,8 @@ const initilize = () => {
         const value = form.getComponent(key).getValue() || placeholder;
         if (value && typeof value === 'string') emitFieldEvent(key, value)
     });
+
+    emitEvent('form:profile-picture:resize', { percent: 1 })
 }
 
 const formComponents = (fakeData => {
