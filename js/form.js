@@ -168,21 +168,14 @@ const formComponents = (fakeData => {
     const resize = (percent => {
         const step = 0.05;
 
-        const smaller = ({ data }) => {
-            const percent = 1 - step;
-
-            save(data, localStorage, percent)
-            emitEvent('form:profile-picture:resize', { percent })
-        };
-        const bigger = ({ data }) => {
-            const percent = 1 + step;
-
+        const resize = percent => ({ data }) => {
             save(data, localStorage, percent)
             emitEvent('form:profile-picture:resize', { percent })
         };
 
         return {
-            down: smaller, up: bigger
+            down: resize(1 - step),
+            up: resize(1 + step)
         }
     })();
 
