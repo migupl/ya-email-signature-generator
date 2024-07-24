@@ -176,7 +176,7 @@ const onLoadForm = (async file => {
         window.setLanguage = form.setLanguage
 
     } catch (error) {
-        console.erro(error)
+        console.error(error)
     }
 
     window.copyCardToClipboard = onCopyCard.toClipboard
