@@ -10,15 +10,16 @@ const [userData, dummyData, save] = await (async fakerLib => {
         dummy = JSON.parse(sessionDummy)
     }
     else {
+        let fake;
         try {
             const lib = await import(fakerLib);
-            dummy = await lib.fakeData
+            fake = await lib.fakeData
 
         } catch (error) {
             console.error(error)
             console.log('Using a harcoded dummy data')
 
-            dummy = {
+            fake = {
                 address: "Solar Patricia 22, 06812, Avilés",
                 companyName: "Salgado y Fonseca",
                 email: "Dolores.AriasGuzman@huge-freckle.info",
@@ -30,6 +31,8 @@ const [userData, dummyData, save] = await (async fakerLib => {
             }
         }
 
+        const dimensions = { width: 150, height: 150 };
+        dummy = { ...fake, dimensions };
         save(dummy)
     }
 
