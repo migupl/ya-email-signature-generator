@@ -30,9 +30,11 @@ const onCopyCard = (() => {
         const images = card.querySelectorAll('img');
         images.forEach(img => img.src = img.src)
 
+        const type = "text/html";
+        const blob = new Blob([card.innerHTML], { type });
         await navigator.clipboard.write([
             new ClipboardItem({
-                'text/html': card.innerHTML
+                [type]: blob
             })
         ])
 
