@@ -164,10 +164,24 @@ const formComponents = (fakeData => {
         emitEvent('form:clean-card', { ids: empties, lang: form.language })
     }
 
-    const resize = percent => {
-        emitEvent('form:profile-picture:resize', { percent })
-    }
-    const resizePercent = 0.05;
+    const resize = (percent => {
+        const step = 0.05;
+
+        const smaller = () => {
+            const percent = 1 - step;
+            console.log('down:', percent)
+            emitEvent('form:profile-picture:resize', { percent })
+        };
+        const bigger = () => {
+            const percent = 1 + step;
+            emitEvent('form:profile-picture:resize', { percent })
+        };
+
+        return {
+            down: smaller, up: bigger
+        }
+    })();
+
     const social = ['Facebook', 'Instagram', 'LinkedIn', 'Mastodon', 'TikTok', 'Twitter X', 'Youtube']
         .reduce((arr, socialName) => {
             const key = socialName.toLowerCase().replace(/\s/g, '-');
@@ -366,7 +380,7 @@ const formComponents = (fakeData => {
                                     key: 'smaller',
                                     label: 'Smaller Image',
                                     action: 'custom',
-                                    custom: () => resize(1 - resizePercent),
+                                    custom: resize.down,
                                     showValidations: false,
                                     theme: 'secondary',
                                     size: 'sm'
@@ -382,7 +396,7 @@ const formComponents = (fakeData => {
                                     key: 'bigger',
                                     label: 'or bigger',
                                     action: 'custom',
-                                    custom: () => resize(1 + resizePercent ),
+                                    custom: resize.up,
                                     showValidations: false,
                                     theme: 'secondary',
                                     size: 'sm'
