@@ -67,7 +67,8 @@ const initilize = () => {
         if (value && typeof value === 'string') emitFieldEvent(key, value)
     });
 
-    emitEvent('form:profile-picture:resize', { percent: 1 })
+    const percent = userData ? userData.size / dummyData.size : 1;
+    emitEvent('form:profile-picture:resize', { percent })
 }
 
 const formComponents = (fakeData => {
