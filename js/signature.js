@@ -18,7 +18,7 @@ const message = (() => {
 
 const onCopyCard = (() => {
     const copy = document.getElementById('copy-card');
-    const copied = document.getElementById('card-copied');
+    let copied = document.getElementById('card-copied-ok');
 
     const toClipboard = async () => {
         copy.style.display = 'none'
@@ -26,17 +26,27 @@ const onCopyCard = (() => {
 
         const card = document.getElementById('signature-card-content');
 
-        // Trick, override the relative path with the resolution of src thas is always an absolute path
+        // Trick, override the relative path with the resolution of src that is always an absolute path
         const images = card.querySelectorAll('img');
         images.forEach(img => img.src = img.src)
 
-        const type = "text/html";
-        const blob = new Blob([card.innerHTML], { type });
-        await navigator.clipboard.write([
-            new ClipboardItem({
-                [type]: blob
-            })
-        ])
+        const type = 'text/html';
+        try {
+            const blob = new Blob([card.innerHTML], { type });
+            await navigator.clipboard.write([
+                new ClipboardItem({
+                    [type]: blob
+                })
+            ])
+
+        } catch (error) {
+            copied.style.display = 'none'
+
+            copied = document.getElementById('card-copied-x');
+            copied.style.display = ''
+
+            console.error(error)
+        }
 
         setTimeout(() => {
             copy.style.display = ''
