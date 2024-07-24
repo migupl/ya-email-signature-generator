@@ -136,37 +136,24 @@ const onForm = (() => {
     return { changeStyle, clean, fill }
 })();
 
-const onResizePictureProfile = (() => {
-    const resize = (() => {
-        const percent = 0.05;
-
-        return {
-            smaller: 1 - percent,
-            bigger: 1 + percent
-        }
-    })();
-
+const onPictureProfile = (() => {
     const profilePicture = document.getElementById('profile-picture');
-    const bigger = event => {
+    const resize = event => {
+        const { detail: { percent } } = event;
+
         event.stopPropagation()
-        profilePicture.height *= resize.bigger
-        profilePicture.width *= resize.bigger
-    };
-    const smaller = event => {
-        event.stopPropagation()
-        profilePicture.height *= resize.smaller
-        profilePicture.width *= resize.smaller
+        profilePicture.height *= percent
+        profilePicture.width *= percent
     };
 
-    return { bigger, smaller };
+    return { resize };
 })();
 
 document.addEventListener('form:clean-card', onForm.clean)
 document.addEventListener('form:change-field', onForm.fill)
 document.addEventListener('form:change-style', onForm.changeStyle)
 
-document.addEventListener('form:profile-picture:bigger', onResizePictureProfile.bigger)
-document.addEventListener('form:profile-picture:smaller', onResizePictureProfile.smaller)
+document.addEventListener('form:profile-picture:resize', onPictureProfile.resize)
 
 const onLoadForm = (async file => {
     try {

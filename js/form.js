@@ -158,6 +158,7 @@ const formComponents = (fakeData => {
         emitEvent('form:clean-card', { ids: empties, lang: form.language })
     }
 
+    const resizePercent = 0.05;
     const social = ['Facebook', 'Instagram', 'LinkedIn', 'Mastodon', 'TikTok', 'Twitter X', 'Youtube']
         .reduce((arr, socialName) => {
             const key = socialName.toLowerCase().replace(/\s/g, '-');
@@ -356,7 +357,7 @@ const formComponents = (fakeData => {
                                     key: 'smaller',
                                     label: 'Smaller Image',
                                     action: 'custom',
-                                    custom: () => emitEvent('form:profile-picture:smaller'),
+                                    custom: () => emitEvent('form:profile-picture:resize', { percent: 1 - resizePercent }),
                                     showValidations: false,
                                     theme: 'secondary',
                                     size: 'sm'
@@ -372,7 +373,7 @@ const formComponents = (fakeData => {
                                     key: 'bigger',
                                     label: 'or bigger',
                                     action: 'custom',
-                                    custom: () => emitEvent('form:profile-picture:bigger'),
+                                    custom: () => emitEvent('form:profile-picture:resize', { percent: 1 + resizePercent }),
                                     showValidations: false,
                                     theme: 'secondary',
                                     size: 'sm'
