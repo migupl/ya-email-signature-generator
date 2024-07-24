@@ -1,9 +1,9 @@
 const [userData, dummyData, save] = await (async fakerLib => {
-    const dimensions = { width: 150, height: 150 };
+    const size = 150;
 
     const storageKey = 'yaEsgState';
     const save = (data, storage = sessionStorage) => {
-        if (!data.dimensions) data = { ...data, dimensions }
+        if (!data.size) data = { ...data, size }
         storage.setItem(storageKey, JSON.stringify(data))
     }
 
@@ -36,7 +36,7 @@ const [userData, dummyData, save] = await (async fakerLib => {
             }
         }
 
-        dummy = { ...fake, dimensions };
+        dummy = { ...fake, size };
         save(dummy)
     }
 
@@ -169,7 +169,6 @@ const formComponents = (fakeData => {
 
         const smaller = () => {
             const percent = 1 - step;
-            console.log('down:', percent)
             emitEvent('form:profile-picture:resize', { percent })
         };
         const bigger = () => {
