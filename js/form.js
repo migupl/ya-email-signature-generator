@@ -517,6 +517,8 @@ form.ready.then(() => {
 })
 
 form.on('change', ({ data, changed }) => {
+    if (!changed?.value) return
+
     save(data, localStorage)
     fill(changed)
 })
