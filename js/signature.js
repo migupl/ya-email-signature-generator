@@ -26,10 +26,6 @@ const onCopyCard = (() => {
 
         const card = document.getElementById('signature-card-content');
 
-        // Trick, override the relative path with the resolution of src that is always an absolute path
-        const images = card.querySelectorAll('img');
-        images.forEach(img => img.src = img.src)
-
         const type = 'text/html';
         try {
             const blob = new Blob([card.innerHTML], { type });
