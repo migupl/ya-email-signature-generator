@@ -100,6 +100,7 @@ const onForm = (() => {
                 el.innerText = value
             }
             else if ('profile-picture' === id) {
+                value = value || defaultPictureProfile
                 el.src = value
             }
             else if ('telephone' === id || 'mobile-phone' === id) {
