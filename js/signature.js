@@ -96,7 +96,20 @@ const onForm = (() => {
     };
     const layoutChangeTypes = {
         font: { attribute: 'font', action: change('fontFamily') },
-        'font-size': { attribute: 'font', action: change('fontSize') },
+        'font-size': {
+            attribute: 'font',
+            action: value => el => {
+                change('fontSize')(value)(el)
+
+                const resize = { small: 11, medium: 14, large: 16};
+                const imgs = el.querySelectorAll('img');
+                imgs.forEach(imagen => {
+                    const size = resize[value];
+                    imagen.height = size
+                    imagen.width = size
+                })
+            }
+        },
         'profile-border-radius': {
             attribute: 'profile-radius',
             action: value => el => change('borderRadius')(`${value}%`)(el)
