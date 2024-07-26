@@ -53,13 +53,6 @@ const emitEvent = (type, detail = {}) => formEl.dispatchEvent(new CustomEvent(ty
 
 const emitFieldEvent = (id, value) => emitEvent('form:change-field', { id, value })
 
-const fill = changed => {
-    if (!changed) return
-
-    const { component: { key }, value } = changed;
-    emitFieldEvent(key, value)
-}
-
 const initilize = () => {
     form.everyComponent((component) => {
         const { component: { key, placeholder } } = component;
@@ -527,12 +520,12 @@ form.ready.then(() => {
 })
 
 form.on('change', ({ data, changed }) => {
-    if (!changed?.value) return
+    if (!changed) return
 
     save(data, localStorage)
 
-    const { component: { key } } = changed;
-    if (formComponents.isEditable(key)) fill(changed)
+    const { component: { key }, value } = changed;
+    if (formComponents.isEditable(key)) emitFieldEvent(key, value)
 })
 
 if (userData) {
