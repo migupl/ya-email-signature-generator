@@ -180,6 +180,8 @@ const onPictureProfile = (() => {
         const { detail: { percent } } = event;
 
         event.stopPropagation()
+        if (!percent) return;
+
         profilePicture.height *= percent
         profilePicture.width *= percent
     };
