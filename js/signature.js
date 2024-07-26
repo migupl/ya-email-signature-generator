@@ -56,40 +56,6 @@ const onCopyCard = (() => {
 })();
 
 const onForm = (() => {
-    const getUrl = str => {
-        const clean = str.trim();
-        if (clean.startsWith('http')) return clean
-        return `https://${clean}`
-    };
-
-    const fillSignature = ({ id, value }) => {
-        const el = document.getElementById(id);
-        if (!el) return
-
-        el.parentNode.style.display = value ? '' : 'none'
-
-        if ('homepage' === id) {
-            el.href = getUrl(value)
-            el.innerText = value
-        }
-        else if ('email' === id) {
-            el.href = 'mailto:' + value
-            el.innerText = value
-        }
-        else if ('profile-picture' === id) {
-            el.src = value
-        }
-        else if ('telephone' === id || 'mobile-phone' === id) {
-            el.href = 'tel:' + value.replace(/\s/g, '')
-            el.innerText = value
-        }
-        else if ('a' === el.localName) {
-            el.href = getUrl(value)
-        }
-        else {
-            el.innerText = value
-        }
-    };
 
     const change = attribute => value => el => {
         el.style[attribute] = value
@@ -149,12 +115,56 @@ const onForm = (() => {
         message.changeLanguageTo(lang)
         message.hide()
     };
-    const fill = event => {
-        event.stopPropagation()
-        fillSignature(event.detail)
-    };
 
-    return { changeStyle, clean, fill }
+    const details = (() => {
+        const getUrl = str => {
+            const clean = str.trim();
+            if (clean.startsWith('http')) return clean
+            return `https://${clean}`
+        };
+
+        const fillSignature = ({ id, value }) => {
+            const el = document.getElementById(id);
+            if (!el) return
+
+            el.parentNode.style.display = value ? '' : 'none'
+
+            if ('homepage' === id) {
+                el.href = getUrl(value)
+                el.innerText = value
+            }
+            else if ('email' === id) {
+                el.href = 'mailto:' + value
+                el.innerText = value
+            }
+            else if ('profile-picture' === id) {
+                el.src = value
+            }
+            else if ('telephone' === id || 'mobile-phone' === id) {
+                el.href = 'tel:' + value.replace(/\s/g, '')
+                el.innerText = value
+            }
+            else if ('a' === el.localName) {
+                el.href = getUrl(value)
+            }
+            else {
+                el.innerText = value
+            }
+        };
+
+        const fill = event => {
+            event.stopPropagation()
+            fillSignature(event.detail)
+        };
+
+        return { fill }
+    })();
+
+    return {
+        changeStyle,
+        clean,
+        fill: details.fill
+    }
 })();
 
 const onPictureProfile = (() => {
