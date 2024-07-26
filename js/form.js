@@ -411,6 +411,22 @@ const formComponents = (fakeData => {
         }
     ];
 
+    const editable = (() => {
+        const isNot = stylize.reduce((arr, styleComponent) => {
+            const { key, components } = styleComponent
+
+            arr.push(key)
+            components?.forEach(c => arr.push(c.key))
+            return arr
+        }, []);
+
+        const is = key => !isNot.includes(key)
+
+        return {
+            is
+        }
+    })();
+
     const layout = {
         components: [
             {
@@ -499,7 +515,7 @@ const formComponents = (fakeData => {
     };
 
     return {
-        layout, translations
+        layout, translations, isEditable: editable.is
     }
 })(dummyData);
 
@@ -514,7 +530,9 @@ form.on('change', ({ data, changed }) => {
     if (!changed?.value) return
 
     save(data, localStorage)
-    fill(changed)
+
+    const { component: { key } } = changed;
+    if (formComponents.isEditable(key)) fill(changed)
 })
 
 if (userData) {
