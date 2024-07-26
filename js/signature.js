@@ -57,6 +57,7 @@ const onCopyCard = (() => {
 
 const onForm = (() => {
 
+    const defaultPictureProfile = '/assets/empty-profile.png';
     const clean = event => {
         const { ids, lang } = event.detail;
 
@@ -66,7 +67,7 @@ const onForm = (() => {
             if (!el) return
 
             if ('profile-picture' === id) {
-                el.src = './assets/empty-profile.png'
+                el.src = defaultPictureProfile
             }
             else {
                 el.parentNode.style.display = 'none'
