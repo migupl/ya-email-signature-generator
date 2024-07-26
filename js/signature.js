@@ -89,8 +89,6 @@ const onForm = (() => {
             const el = document.getElementById(id);
             if (!el) return
 
-            el.parentNode.style.display = value ? '' : 'none'
-
             if ('homepage' === id) {
                 el.href = getUrl(value)
                 el.innerText = value
@@ -113,6 +111,8 @@ const onForm = (() => {
             else {
                 el.innerText = value
             }
+
+            el.parentNode.style.display = value ? '' : 'none'
         };
 
         const fill = event => {
