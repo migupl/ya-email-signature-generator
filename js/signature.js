@@ -57,45 +57,6 @@ const onCopyCard = (() => {
 
 const onForm = (() => {
 
-    const change = attribute => value => el => {
-        el.style[attribute] = value
-    };
-    const layoutChangeTypes = {
-        font: { attribute: 'font', action: change('fontFamily') },
-        'font-size': {
-            attribute: 'font',
-            action: value => el => {
-                change('fontSize')(value)(el)
-
-                const resize = { small: 11, medium: 14, large: 16};
-                const imgs = el.querySelectorAll('img');
-                imgs.forEach(imagen => {
-                    const size = resize[value];
-                    imagen.height = size
-                    imagen.width = size
-                })
-            }
-        },
-        'profile-border-radius': {
-            attribute: 'profile-radius',
-            action: value => el => change('borderRadius')(`${value}%`)(el)
-        },
-        'social-color': { attribute: 'social-color', action: change('backgroundColor') },
-        'text-color': { attribute: 'font', action: change('color') },
-        'theme-color': {
-            attribute: 'theme-color',
-            action: value => el => change('img' === el.localName ? 'backgroundColor' : 'color')(value)(el)
-        }
-    };
-
-    const changeStyle = event => {
-        const { type, value } = event.detail;
-        const { attribute, action } = layoutChangeTypes[type];
-
-        event.stopPropagation()
-        document.querySelectorAll(`[${attribute}]`)
-            .forEach(action(value))
-    };
     const clean = event => {
         const { ids, lang } = event.detail;
 
@@ -160,8 +121,54 @@ const onForm = (() => {
         return { fill }
     })();
 
+    const style = (() => {
+        const change = attribute => value => el => {
+            el.style[attribute] = value
+        };
+        const layoutChangeTypes = {
+            font: { attribute: 'font', action: change('fontFamily') },
+            'font-size': {
+                attribute: 'font',
+                action: value => el => {
+                    change('fontSize')(value)(el)
+
+                    const resize = { small: 11, medium: 14, large: 16};
+                    const imgs = el.querySelectorAll('img');
+                    imgs.forEach(imagen => {
+                        const size = resize[value];
+                        imagen.height = size
+                        imagen.width = size
+                    })
+                }
+            },
+            'profile-border-radius': {
+                attribute: 'profile-radius',
+                action: value => el => change('borderRadius')(`${value}%`)(el)
+            },
+            'social-color': { attribute: 'social-color', action: change('backgroundColor') },
+            'text-color': { attribute: 'font', action: change('color') },
+            'theme-color': {
+                attribute: 'theme-color',
+                action: value => el => change('img' === el.localName ? 'backgroundColor' : 'color')(value)(el)
+            }
+        };
+
+        const changeStyle = event => {
+            const { type, value } = event.detail;
+            const { attribute, action } = layoutChangeTypes[type];
+
+            event.stopPropagation()
+            document.querySelectorAll(`[${attribute}]`)
+                .forEach(action(value))
+        };
+
+        return {
+            change: changeStyle
+        }
+    })();
+
     return {
-        changeStyle,
+        changeStyle: style.change,
         clean,
         fill: details.fill
     }
